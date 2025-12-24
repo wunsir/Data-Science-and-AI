@@ -20,7 +20,9 @@ const app = createApp({
             if (data.value.logic) {
                 list.push({ type: 'logic', content: data.value.logic });
             }
-            
+            // 5. 方法论
+            list.push({ type: 'methodology', content: data.value.methodology });
+                        
             // 3. 数据清洗与标准化
             if (data.value.dataTransform) {
                 list.push({ type: 'transform', content: data.value.dataTransform });
@@ -31,8 +33,7 @@ const app = createApp({
                 list.push({ type: 'regression', content: data.value.regression });
             }
             
-            // 5. 方法论
-            list.push({ type: 'methodology', content: data.value.methodology });
+
 
             // 6. 故事章节
             data.value.story.forEach(chapter => {

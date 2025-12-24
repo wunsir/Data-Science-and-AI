@@ -1,10 +1,10 @@
 export const analysisData = {
     intro: {
         title: "招聘市场数据洞察",
-        subtitle: "基于 Boss直聘、前程无忧、智联招聘的 20,000+ 条数据深度分析",
+        subtitle: "基于 Boss直聘、前程无忧、智联招聘的 40,000+ 条数据深度分析",
         description: "本项目旨在通过对中国主流招聘平台的数据挖掘，揭示数据科学与AI领域的真实人才需求。我们不仅关注薪资数字，更致力于通过自然语言处理（NLP）和计量经济学模型，量化技能、学历、地域对薪资的深层影响机制。",
         stats: [
-            { label: "数据总量", value: "20,000+", unit: "条" },
+            { label: "数据总量", value: "40,000+", unit: "条" },
             { label: "覆盖平台", value: "3", unit: "个" },
             { label: "分析维度", value: "12+", unit: "项" },
             { label: "核心发现", value: "58.0", unit: "技能系数" }
@@ -31,6 +31,12 @@ export const analysisData = {
             }
         ]
     },
+    methodology: [
+        { step: "1. 数据清洗与标准化", icon: "🧹", details: "针对不同平台的薪资格式编写正则解析函数，统一转换为月均薪资。将学历和经验要求映射为定序数值变量。", keyPoints: ["正则表达式解析", "单位统一化", "缺失值处理"] },
+        { step: "2. NLP 文本挖掘", icon: "📝", details: "使用 Jieba 对职位描述进行分词，计算 TF-IDF 权重，利用余弦相似度计算每个岗位 JD 与「高薪模板」的语义相似度。", keyPoints: ["Jieba 分词", "TF-IDF 向量化", "余弦相似度"] },
+        { step: "3. 计量经济学建模", icon: "📊", details: "构建多元线性回归（OLS）模型，量化各因素对薪资的边际贡献。进行异质性分析。", keyPoints: ["OLS 回归", "交互效应", "分组回归"] },
+        { step: "4. 因果推断与稳健性检验", icon: "🔬", details: "引入倾向得分匹配（PSM）和安慰剂检验（Placebo Test）确保结论可靠性。", keyPoints: ["PSM 匹配", "安慰剂测试", "敏感性分析"] }
+    ],
     dataTransform: {
         title: "数据清洗与标准化",
         subtitle: "从原始文本到可分析变量",
@@ -104,12 +110,6 @@ export const analysisData = {
             ]
         }
     ],
-    methodology: [
-        { step: "1. 数据清洗与标准化", icon: "🧹", details: "针对不同平台的薪资格式编写正则解析函数，统一转换为月均薪资。将学历和经验要求映射为定序数值变量。", keyPoints: ["正则表达式解析", "单位统一化", "缺失值处理"] },
-        { step: "2. NLP 文本挖掘", icon: "📝", details: "使用 Jieba 对职位描述进行分词，计算 TF-IDF 权重，利用余弦相似度计算每个岗位 JD 与「高薪模板」的语义相似度。", keyPoints: ["Jieba 分词", "TF-IDF 向量化", "余弦相似度"] },
-        { step: "3. 计量经济学建模", icon: "📊", details: "构建多元线性回归（OLS）模型，量化各因素对薪资的边际贡献。进行异质性分析。", keyPoints: ["OLS 回归", "交互效应", "分组回归"] },
-        { step: "4. 因果推断与稳健性检验", icon: "🔬", details: "引入倾向得分匹配（PSM）和安慰剂检验（Placebo Test）确保结论可靠性。", keyPoints: ["PSM 匹配", "安慰剂测试", "敏感性分析"] }
-    ],
     story: [
         {
             id: "market-landscape",
@@ -118,14 +118,14 @@ export const analysisData = {
             description: "基于智联招聘数据，我们首先审视了全国范围内的招聘市场宏观特征。从地理分布到薪资不平等，揭示了人才市场的整体面貌。",
             keyFindings: ["北上广深平均薪资显著高于其他城市", "技术类岗位薪酬上限极高，拉大基尼系数", "新一线城市（杭州、成都）正在快速追赶"],
             images: [
-                { src: "./data/picture/zlzp城市岗位薪资热力图.png", title: "全国岗位薪资热力分布", source: "智联招聘", explanation: "热力图显示，京津冀、长三角、珠三角三大经济圈是高薪岗位的主要聚集地。颜色越深表示该地区的平均薪资越高。" },
-                { src: "./data/picture/zlzp城市平均薪资对比.png", title: "主要城市平均薪资对比", source: "智联招聘", explanation: "柱状图直观对比了各主要城市的平均薪资水平，北京、上海、深圳位列前三，杭州紧随其后。" },
-                { src: "./data/picture/zlzp城市学历要求构成.png", title: "各城市学历要求构成", source: "智联招聘", explanation: "堆叠柱状图展示了不同城市对学历的要求差异。一线城市对本科及以上学历的需求占比更高。" },
-                { src: "./data/picture/zlzp岗位类型薪酬排名.png", title: "不同岗位类型薪酬排名", source: "智联招聘", explanation: "数据显示，算法、架构、AI相关岗位的薪资中位数显著高于其他技术岗位。" },
-                { src: "./data/picture/zlzp薪资不平等洛伦兹曲线.png", title: "薪资不平等洛伦兹曲线", source: "智联招聘", explanation: "洛伦兹曲线越偏离45度线，说明薪资不平等程度越高。图中显示IT行业的薪资分配存在明显的不平等现象。" }
+                { src: "./data/picture/zlzp城市岗位薪资热力图.png", title: "全国岗位薪资热力分布", source: "智联招聘", explanation: "热力图显示，投行、基金、量化行业薪资更高，数据分析、运营等相对较低。" },
+                { src: "./data/picture/zlzp城市平均薪资对比.png", title: "主要城市平均薪资对比", source: "智联招聘", explanation: "柱状图直观对比了各主要城市的平均薪资水平，北京、深圳、上海位列前三，高于新一线城市。" },
+                { src: "./data/picture/zlzp城市学历要求构成.png", title: "各城市学历要求构成", source: "智联招聘", explanation: "堆叠柱状图展示了不同城市对学历的要求差异。本科是学历门槛，一线城市对硕士需求更高。" },
+                { src: "./data/picture/zlzp岗位类型薪酬排名.png", title: "不同岗位类型薪酬排名", source: "智联招聘", explanation: "数据显示，投行、基金、量化行业薪资更高（和前面热力图对应）。" },
+                { src: "./data/picture/zlzp薪资不平等洛伦兹曲线.png", title: "薪资不平等洛伦兹曲线", source: "智联招聘", explanation: "洛伦兹曲线越偏离45度线，说明薪资不平等程度越高。图中显示金融类岗位薪资不平等更突出，数据分析相对均衡。" }
             ],
             interactiveCharts: [
-                { src: "./data/treemap_market_of_zlzp.html", title: "市场结构树图 (交互)", source: "智联招聘", explanation: "交互式树图展示了各城市、岗位类型的市场结构占比，可点击下钻查看细分数据。" }
+                { src: "./data/treemap_market_of_zlzp.html", title: "市场结构树图 (交互)", source: "智联招聘", explanation: "交互式树图展示了各城市、岗位类型的市场结构占比，可点击查看细分数据。" }
             ],
             insight: "一线城市依然是高薪聚集地，但薪资不平等现象（洛伦兹曲线）在不同城市间存在显著差异。技术类岗位的薪酬上限极高，拉大了整体差距。"
         },
@@ -136,11 +136,11 @@ export const analysisData = {
             description: "深入 BOSS直聘与前程无忧的微观数据，我们验证了学历与经验作为薪资决定性因素的地位。两平台数据呈现出高度的一致性。",
             keyFindings: ["硕士学历平均薪资比本科高出约 40%", "3-5年和5-10年是薪资增长的关键跃升期", "大公司（1000人以上）平均薪资高于中小企业"],
             images: [
-                { src: "./data/picture/boss薪资分布与学历经验分析.png", title: "薪资分布与学历/经验关系", source: "BOSS直聘", explanation: "三联图展示：左图为薪资整体分布（右偏分布），中图为不同学历的薪资箱线图，右图为经验与薪资的关系曲线。" },
+                { src: "./data/picture/boss薪资分布与学历经验分析.png", title: "薪资分布与学历/经验关系", source: "BOSS直聘", explanation: "该图综合展示了薪资的整体分布形态（偏态分布）、不同学历的薪资箱线图对比，以及经验年限与薪资增长的关系曲线。" },
                 { src: "./data/picture/qcwy薪资分布.png", title: "整体薪资分布直方图", source: "前程无忧", explanation: "薪资分布呈现典型的右偏态，大部分岗位集中在 10-25K 区间，但存在长尾高薪岗位。" },
                 { src: "./data/picture/qcwy学历薪资.png", title: "学历对薪资的影响", source: "前程无忧", explanation: "箱线图清晰显示：学历越高，薪资中位数和上限都越高。博士学历的薪资优势尤为明显。" },
                 { src: "./data/picture/qcwy经验薪资.png", title: "经验对薪资的影响", source: "前程无忧", explanation: "折线图显示薪资随经验增长呈 S 型曲线：0-3年增长平缓，3-10年快速增长，10年后趋于平稳。" },
-                { src: "./data/picture/qcwy公司规模薪资.png", title: "公司规模与薪资关系", source: "前程无忧", explanation: "大公司（尤其是万人规模）在薪资方面具有明显优势，可能与资源、融资能力和品牌溢价有关。" },
+                { src: "./data/picture/qcwy公司规模薪资.png", title: "公司规模与薪资关系", source: "前程无忧", explanation: "大公司在薪资方面具有明显优势，可能与资源、融资能力和品牌溢价有关。" },
                 { src: "./data/picture/qcwy职业阶段薪资.png", title: "职业阶段与薪资关系", source: "前程无忧", explanation: "从入门级到高级/专家级，薪资呈现阶梯式增长，印证了职业发展路径的重要性。" }
             ],
             interactiveCharts: [
@@ -157,18 +157,18 @@ export const analysisData = {
             description: "利用 NLP 技术，我们从海量 JD 中提取了高薪核心词汇，并构建了「高薪模板」。通过计算相似度，我们量化了技能的含金量。",
             keyFindings: ["高薪岗位的 JD 中，硬技能（Python、算法、架构）出现频率显著更高", "低薪岗位更多强调软技能（沟通、吃苦耐劳）", "与高薪模板的相似度与实际薪资呈强正相关 (r > 0.6)"],
             images: [
-                { src: "./data/picture/boss岗位技能词云与统计.png", title: "岗位核心技能词云", source: "BOSS直聘", explanation: "词云展示了 JD 中出现频率最高的技能关键词。字体越大表示出现频率越高。Python、数据分析、机器学习是核心高频词。" },
+                { src: "./data/picture/boss岗位技能词云与统计.png", title: "岗位核心技能词云", source: "BOSS直聘", explanation: "词云展示了 JD 中出现频率最高的技能关键词。字体越大表示出现频率越高，Python、数据分析、机器学习等词汇占据核心位置。" },
                 { src: "./data/picture/qcwy福利关键词词云与统计.png", title: "福利关键词分析", source: "前程无忧", explanation: "企业福利词云显示，五险一金、带薪年假是基本配置，而股票期权、弹性工作等则是高薪企业的差异化竞争点。" },
-                { src: "./data/picture/boss高低薪岗位核心词汇对比AI筛选.png", title: "高薪 vs 低薪岗位核心词汇对比 (AI筛选)", source: "BOSS直聘", explanation: "使用 AI 模型过滤行政废话后的对比图。左侧为高薪岗位核心词（算法、架构、深度学习），右侧为低薪岗位核心词（沟通、执行、配合）。" },
-                { src: "./data/picture/boss高低薪岗位核心词汇对比.png", title: "高薪 vs 低薪岗位核心词汇对比 (原始)", source: "BOSS直聘", explanation: "未经 AI 筛选的原始对比，可以看到高低薪岗位在用词上的显著差异。" },
-                { src: "./data/picture/boss职位描述相似度与薪资关系.png", title: "JD相似度与薪资关系", source: "BOSS直聘", explanation: "散点图 + 回归线显示：与高薪模板的相似度越高，实际薪资越高。红色回归线的斜率为正，说明正相关关系显著。" },
-                { src: "./data/picture/qcwy职位描述相似度与薪资关系.png", title: "JD相似度与薪资关系", source: "前程无忧", explanation: "前程无忧数据同样验证了这一结论，回归线斜率与 BOSS 数据高度一致。" },
-                { src: "./data/picture/boss相似度等级与薪资关系.png", title: "相似度等级与平均薪资", source: "BOSS直聘", explanation: "将相似度分为5档后的柱状图：从「非常不相似」到「非常相似」，平均薪资呈单调递增趋势。" },
+                { src: "./data/picture/boss高低薪岗位核心词汇对比.png", title: "高薪 vs 低薪岗位核心词汇对比 (原始)", source: "BOSS直聘", explanation: "未经 AI 筛选的原始对比图。" },
+                { src: "./data/picture/boss高低薪岗位核心词汇对比AI筛选.png", title: "高薪 vs 低薪岗位核心词汇对比 (Qwen AI筛选)", source: "BOSS直聘", explanation: "该图对比展示了经 AI 清洗去除福利、套话后的核心词汇：高薪岗位（薪资前10%）更侧重数学、Python等硬技能，而低薪岗位更侧重沟通、执行等软技能。" },
+                { src: "./data/picture/boss职位描述相似度与薪资关系.png", title: "JD相似度与薪资关系", source: "BOSS直聘", explanation: "将高薪组 JD 合并为“高薪原型”，计算每条 JD 与原型的相似度。散点图与回归线显示：与高薪模板的相似度越高，实际薪资越高。" },
+                { src: "./data/picture/qcwy职位描述相似度与薪资关系.png", title: "JD相似度与薪资关系", source: "前程无忧", explanation: "前程无忧数据同样验证了这一结论，回归趋势与 BOSS 数据高度一致。" },
+                { src: "./data/picture/boss相似度等级与薪资关系.png", title: "相似度等级与平均薪资", source: "BOSS直聘", explanation: "将相似度分档后的柱状图显示：随着相似度等级的提升（从非常不相似到非常相似），平均薪资呈现整体递增趋势。" },
                 { src: "./data/picture/qcwy相似度等级与薪资关系.png", title: "相似度等级与平均薪资", source: "前程无忧", explanation: "前程无忧数据呈现相同规律，验证了相似度指标的跨平台有效性。" },
-                { src: "./data/picture/boss相似度分布直方图.png", title: "相似度分布直方图", source: "BOSS直聘", explanation: "相似度得分大致呈正态分布，红色虚线标记了均值位置。大部分岗位的相似度集中在 0.3-0.6 区间。" },
+                { src: "./data/picture/boss相似度分布直方图.png", title: "相似度分布直方图", source: "BOSS直聘", explanation: "直方图展示了相似度得分的分布情况，大致呈右偏分布，反映了市场上大部分岗位的技能匹配度和高薪技能相似度较低，“高薪技能组合”仍较为稀缺。" },
                 { src: "./data/picture/qcwy相似度分布.png", title: "相似度分布直方图", source: "前程无忧", explanation: "前程无忧的相似度分布与 BOSS 类似，说明两平台的岗位描述特征具有一致性。" },
-                { src: "./data/picture/boss薪资分组相似度箱线图.png", title: "薪资分组相似度箱线图", source: "BOSS直聘", explanation: "将样本按薪资中位数分为高薪组和低薪组，高薪组的相似度分布明显右移，中位数更高。" },
-                { src: "./data/picture/qcwy薪资分组相似度箱线图.png", title: "薪资分组相似度箱线图", source: "前程无忧", explanation: "两平台数据均显示：高薪岗位的 JD 与「高薪模板」更为接近。" }
+                { src: "./data/picture/boss薪资分组相似度箱线图.png", title: "薪资分组相似度箱线图", source: "BOSS直聘", explanation: "将样本按薪资分为高薪组和低薪组，箱线图显示高薪组的相似度分布整体较高，中位数明显优于低薪组。" },
+                { src: "./data/picture/qcwy薪资分组相似度箱线图.png", title: "薪资分组相似度箱线图", source: "前程无忧", explanation: "两平台数据均显示：高薪岗位的 JD 与「高薪模板」的语义距离更近。" }
             ],
             interactiveCharts: [
                 { src: "./data/diamond_chart_fixed_of_boss.html", title: "高薪技能词云雷达 (交互)", source: "BOSS直聘", explanation: "交互式钻石形词云展示高薪岗位的硬核技能关键词，词越大表示TF-IDF权重越高，含金量越高。" },
@@ -180,16 +180,16 @@ export const analysisData = {
             id: "regression-attribution",
             title: "4. 归因分析",
             subtitle: "谁在决定你的工资？",
-            description: "通过多元回归模型，我们剥离了各因素的独立贡献。令人惊讶的是，BOSS直聘与前程无忧的模型结果高度互证。",
+            description: "通过多元回归模型，我们剥离了各因素的独立贡献，结果显示，BOSS直聘与前程无忧的模型结果高度互证。",
             keyFindings: ["技能相似度的回归系数（58.0）远超学历（2.8）和经验（1.7）", "控制其他变量后，学历每升一级，薪资增加约 2.8K", "模型 R² 约为 0.42，说明这三个变量解释了 42% 的薪资变异"],
             images: [
-                { src: "./data/picture/boss薪资影响因素相关性热力图.png", title: "变量相关性热力图", source: "BOSS直聘", explanation: "热力图展示了薪资与各自变量之间的相关系数。技能相似度与薪资的相关性最强（颜色最深）。" },
+                { src: "./data/picture/boss薪资影响因素相关性热力图.png", title: "变量相关性热力图", source: "BOSS直聘", explanation: "热力图展示了薪资与各自变量之间的相关系数。颜色深浅代表相关性强弱，显示技能相似度与薪资的相关性最强。" },
                 { src: "./data/picture/qcwy薪资相关性热力图.png", title: "变量相关性热力图", source: "前程无忧", explanation: "前程无忧数据的相关性矩阵与 BOSS 高度一致，验证了结论的跨平台稳健性。" },
-                { src: "./data/picture/qcwy薪资关键技能相关性.png", title: "关键技能相关性", source: "前程无忧", explanation: "更细粒度的分析显示，具体技能（如 Python、SQL）与薪资的相关性。" },
-                { src: "./data/picture/boss薪资影响因素堆积分析.png", title: "各因素边际贡献堆积图", source: "BOSS直聘", explanation: "堆积柱状图直观展示了从基准薪资出发，学历、经验、技能相似度各自贡献了多少薪资增量。" },
+                { src: "./data/picture/qcwy薪资关键技能相关性.png", title: "关键技能相关性", source: "前程无忧", explanation: "分析显示具体技能（如 Python、SQL）与薪资之间存在显著的正相关关系。" },
+                { src: "./data/picture/boss薪资影响因素堆积分析.png", title: "各因素边际贡献堆积图", source: "BOSS直聘", explanation: "堆积图直观展示了从基准薪资出发，学历、经验、技能相似度各自贡献了多少薪资增量。" },
                 { src: "./data/picture/qcwy薪资影响因素堆积分析.png", title: "各因素边际贡献堆积图", source: "前程无忧", explanation: "两平台的堆积图结构相似，都显示技能相似度是最大的边际贡献因子。" },
-                { src: "./data/picture/boss薪资影响因素重要性排序.png", title: "影响因素重要性排序", source: "BOSS直聘", explanation: "横向柱状图按回归系数大小排序，技能相似度以绝对优势领先。这是本研究的核心发现。" },
-                { src: "./data/picture/qcwy薪资影响因素对比.png", title: "影响因素对比", source: "前程无忧", explanation: "前程无忧数据同样显示技能相似度的重要性远超传统因素。" }
+                { src: "./data/picture/boss薪资影响因素重要性排序.png", title: "影响因素重要性排序", source: "BOSS直聘", explanation: "图表对回归系数进行了排序，技能相似度以绝对优势领先，表明其对薪资波动的影响最大。" },
+                { src: "./data/picture/qcwy薪资影响因素对比.png", title: "影响因素对比", source: "前程无忧", explanation: "前程无忧数据同样显示，相比于传统因素，技能相似度的重要性更为突出。" }
             ],
             insight: "在控制了学历和经验后，「技能描述相似度」依然对薪资有显著的正向贡献，且其边际效应在两个平台中均得到了验证。技能是学历之外最重要的溢价来源。"
         },
@@ -200,15 +200,15 @@ export const analysisData = {
             description: "我们进一步探讨了「学历-技能」的交互效应，并通过 PSM 和安慰剂检验确保了结论的因果可靠性。",
             keyFindings: ["高学历群体中，技能的边际回报更高（正向调节效应）", "一线城市的技能回报率显著高于二三线城市", "安慰剂测试证明结论并非统计巧合 (p < 0.001)"],
             images: [
-                { src: "./data/picture/boss学历对技能溢价的调节作用.png", title: "学历对技能溢价的调节作用", source: "BOSS直聘", explanation: "交互效应图显示：高学历群体（红线）的回归斜率更陡，说明学历能放大技能的价值。" },
+                { src: "./data/picture/boss学历对技能溢价的调节作用.png", title: "学历对技能溢价的调节作用", source: "BOSS直聘", explanation: "图中显示：高学历群体的回归斜率更陡，说明学历能放大技能的价值（正向调节）。" },
                 { src: "./data/picture/qcwy学历对技能溢价调节作用.png", title: "学历对技能溢价的调节作用", source: "前程无忧", explanation: "前程无忧数据同样验证了学历的正向调节作用：学历越高，技能越值钱。" },
-                { src: "./data/picture/boss城市等级技能回报率差异.png", title: "城市等级技能回报率差异", source: "BOSS直聘", explanation: "分组回归结果显示，一线城市的技能回归系数（约 65）显著高于二三线城市（约 45）。" },
-                { src: "./data/picture/qcwy城市等级技能回报率.png", title: "城市等级技能回报率差异", source: "前程无忧", explanation: "前程无忧数据呈现相同规律：大城市对技能的溢价更高。" },
-                { src: "./data/picture/boss技能溢价异质性分析.png", title: "技能溢价异质性分析", source: "BOSS直聘", explanation: "误差棒图展示了不同子样本（按公司规模、职业阶段分组）中技能系数的估计值和置信区间。" },
-                { src: "./data/picture/qcwy技能溢价异质性分析.png", title: "技能溢价异质性分析", source: "前程无忧", explanation: "异质性分析显示，技能溢价效应在不同群体中稳健存在，但大小有所差异。" },
+                { src: "./data/picture/boss城市等级技能回报率差异.png", title: "城市等级技能回报率差异", source: "BOSS直聘", explanation: "分组回归结果显示，新一线城市的技能回报率显著最高。" },
+                { src: "./data/picture/qcwy城市等级技能回报率.png", title: "城市等级技能回报率差异", source: "前程无忧", explanation: "前程无忧数据则是一线城市技能回报率最高，呈现相反规律，可能是样本量不足。" },
+                { src: "./data/picture/boss技能溢价异质性分析.png", title: "技能溢价异质性分析", source: "BOSS直聘", explanation: "图表展示了技能溢价效应在不同子样本（分组）中的系数估计值和置信区间，入门岗位/小公司中，技能含金量对薪资提升更明显。。" },
+                { src: "./data/picture/qcwy技能溢价异质性分析.png", title: "技能溢价异质性分析", source: "前程无忧", explanation: "前程无忧的数据亦和BOSS直聘之间存在矛盾。" },
                 { src: "./data/picture/boss倾向得分匹配效果验证.png", title: "PSM匹配效果验证", source: "BOSS直聘", explanation: "倾向得分匹配（PSM）用于消除选择偏差。匹配后，处理组和控制组的倾向得分分布高度重叠，说明匹配效果良好。" },
                 { src: "./data/picture/qcwy倾向得分匹配效果验证.png", title: "PSM匹配效果验证", source: "前程无忧", explanation: "前程无忧数据的 PSM 匹配同样有效，为因果推断提供了坚实基础。" },
-                { src: "./data/picture/boss安慰剂测试稳健性检验.png", title: "安慰剂测试稳健性检验", source: "BOSS直聘", explanation: "灰色区域为 500 次随机置换产生的「假」系数分布，红色虚线为真实系数。真实系数远在随机分布之外，证明结果并非偶然。" },
+                { src: "./data/picture/boss安慰剂测试稳健性检验.png", title: "安慰剂测试稳健性检验", source: "BOSS直聘", explanation: "随机置换测试产生的系数分布与真实系数相距甚远，证明我们的结果具有统计显著性，并非偶然所得。" },
                 { src: "./data/picture/qcwy安慰剂测试稳健性检验.png", title: "安慰剂测试稳健性检验", source: "前程无忧", explanation: "两平台的安慰剂测试均显示：真实回归系数具有统计学显著性，排除了随机因素干扰。" }
             ],
             interactiveCharts: [
