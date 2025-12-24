@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>招聘数据分析 | Data Insights</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <!-- 四列蛇形背景动画 -->
+        <div id="floating-bg">
+            <div class="bg-col col-up">
+                <img v-for="(img, index) in allImages.slice(0, Math.ceil(allImages.length/4))" :key="'c1-'+index" :src="img.src" alt="">
+                <img v-for="(img, index) in allImages.slice(0, Math.ceil(allImages.length/4))" :key="'c1-d-'+index" :src="img.src" alt="">
+            </div>
+            <div class="bg-col col-down">
+                <img v-for="(img, index) in allImages.slice(Math.ceil(allImages.length/4), Math.ceil(allImages.length/2))" :key="'c2-'+index" :src="img.src" alt="">
+                <img v-for="(img, index) in allImages.slice(Math.ceil(allImages.length/4), Math.ceil(allImages.length/2))" :key="'c2-d-'+index" :src="img.src" alt="">
+            </div>
+            <div class="bg-col col-up">
+                <img v-for="(img, index) in allImages.slice(Math.ceil(allImages.length/2), Math.ceil(allImages.length*3/4))" :key="'c3-'+index" :src="img.src" alt="">
+                <img v-for="(img, index) in allImages.slice(Math.ceil(allImages.length/2), Math.ceil(allImages.length*3/4))" :key="'c3-d-'+index" :src="img.src" alt="">
+            </div>
+            <div class="bg-col col-down">
+                <img v-for="(img, index) in allImages.slice(Math.ceil(allImages.length*3/4))" :key="'c4-'+index" :src="img.src" alt="">
+                <img v-for="(img, index) in allImages.slice(Math.ceil(allImages.length*3/4))" :key="'c4-d-'+index" :src="img.src" alt="">
+            </div>
+        </div>
+
+        <!-- 毛玻璃遮罩 -->
+        <div class="glass-overlay"></div>
+
+        <!-- 顶部导航 -->
+        <header class="glass-nav">
+            <div class="nav-brand">
+                <span class="brand-icon">📊</span>
+                <h1>{{ data.intro.title }}</h1>
+            </div>
+            <nav class="nav-links" v-if="!isPresentationMode">
+                <a href="#intro" @click.prevent="scrollTo('intro')">概述</a>
+                <a href="#logic" @click.prevent="scrollTo('logic')">逻辑</a>
+                <a href="#transform" @click.prevent="scrollTo('transform')">清洗</a>
+                <a href="#regression" @click.prevent="scrollTo('regression')">模型</a>
+                <a href="#gallery" @click.prevent="scrollTo('gallery')">可视化</a>
+            </nav>
+            <div class="nav-actions">
+                <button @click="togglePresentation" class="btn-presentation">
+                    <span v-if="!isPresentationMode">▶ 开始演示</span>
+                    <span v-else>✕ 退出演示</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ==================== 普通模式 ==================== -->
+        <main v-if="!isPresentationMode" class="main-content">
+            
+            <!-- Hero / 介绍区 -->
+            <section id="intro" class="hero-section">
+                <div class="hero-content glass-card">
+                    <h2 class="section-title">{{ data.intro.title }}</h2>
+                    <p class="hero-subtitle">{{ data.intro.subtitle }}</p>
+                    <p class="hero-description">{{ data.intro.description }}</p>
+                    
+                    <!-- 关键统计数字 -->
+                    <div class="stats-grid">
+                        <div v-for="stat in data.intro.stats" :key="stat.label" class="stat-item">
+                            <span class="stat-value">{{ stat.value }}</span>
+                            <span class="stat-unit">{{ stat.unit }}</span>
+                            <span class="stat-label">{{ stat.label }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 分析逻辑架构 -->
+            <section id="logic" class="logic-section">
+                <div class="section-header glass-card">
+                    <h2 class="section-title">{{ data.logic.title }}</h2>
+                    <p class="section-subtitle">{{ data.logic.subtitle }}</p>
+                    <p class="section-desc">{{ data.logic.description }}</p>
+                </div>
+                <div class="logic-grid">
+                    <div v-for="item in data.logic.items" :key="item.type" class="logic-card glass-card">
+                        <div class="logic-icon">{{ item.icon }}</div>
+                        <h3 class="logic-title">{{ item.title }}</h3>
+                        <p class="logic-desc">{{ item.desc }}</p>
+                        <div class="source-tags">
+                            <span v-for="src in item.sources" :key="src" class="source-tag" :class="getSourceClass(src)">{{ src }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 数据清洗与标准化 -->
+            <section id="transform" class="transform-section">
+                <div class="section-header glass-card">
+                    <h2 class="section-title">{{ data.dataTransform.title }}</h2>
+                    <p class="section-subtitle">{{ data.dataTransform.subtitle }}</p>
+                    <p class="section-desc">{{ data.dataTransform.description }}</p>
+                </div>
+                
+                <div class="transform-content">
+                    <!-- 薪资清洗示例 -->
+                    <div class="transform-card glass-card">
+                        <h3>💰 薪资标准化示例</h3>
+                        <div class="salary-examples">
+                            <div v-for="ex in data.dataTransform.salaryExamples" :key="ex.original" class="salary-example">
+                                <div class="salary-original">{{ ex.original }}</div>
+                                <div class="salary-arrow">→</div>
+                                <div class="salary-cleaned">{{ ex.cleaned }}</div>
+                                <div class="salary-formula">{{ ex.formula }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 学历/经验映射 -->
+                    <div class="mappings-grid">
+                        <div class="mapping-card glass-card">
+                            <h3>🎓 学历映射</h3>
+                            <div class="mapping-list">
+                                <div v-for="m in data.dataTransform.mappings.education" :key="m.label" class="mapping-item">
+                                    <span class="mapping-label">{{ m.label }}</span>
+                                    <span class="mapping-value">{{ m.value }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mapping-card glass-card">
+                            <h3>⏳ 经验映射</h3>
+                            <div class="mapping-list">
+                                <div v-for="m in data.dataTransform.mappings.experience" :key="m.label" class="mapping-item">
+                                    <span class="mapping-label">{{ m.label }}</span>
+                                    <span class="mapping-value">{{ m.value }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 回归模型核心发现 -->
+            <section id="regression" class="regression-section">
+                <div class="section-header glass-card highlight-section">
+                    <h2 class="section-title">🎯 {{ data.regression.title }}</h2>
+                    <p class="section-subtitle">{{ data.regression.subtitle }}</p>
+                </div>
+                
+                <div class="regression-content">
+                    <!-- 核心公式展示 -->
+                    <div class="formula-card glass-card">
+                        <div class="formula-display">
+                            <span class="formula-text">{{ data.regression.formula }}</span>
+                        </div>
+                        <div class="formula-stats">
+                            <span class="r-squared">R² = {{ data.regression.rSquared }}</span>
+                            <span class="n-obs">N = {{ data.regression.nObs.toLocaleString() }}</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 系数解释表 -->
+                    <div class="coefficients-card glass-card">
+                        <h3>回归系数详解</h3>
+                        <table class="coef-table">
+                            <thead>
+                                <tr>
+                                    <th>变量</th>
+                                    <th>系数</th>
+                                    <th>P值</th>
+                                    <th>解释</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="coef in data.regression.coefficients" :key="coef.name" :class="{ 'highlight-row': coef.value > 50 }">
+                                    <td>{{ coef.name }}</td>
+                                    <td class="coef-value">{{ coef.value }}</td>
+                                    <td>{{ coef.pValue }}</td>
+                                    <td class="coef-interp">{{ coef.interpretation }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 核心洞察 -->
+                    <div class="key-insight glass-card">
+                        <div class="insight-icon">💡</div>
+                        <p class="insight-text">{{ data.regression.keyInsight }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 方法论 -->
+            <section id="methodology" class="methodology-section">
+                <div class="section-header glass-card">
+                    <h2 class="section-title">研究方法论</h2>
+                </div>
+                <div class="methodology-grid">
+                    <div v-for="step in data.methodology" :key="step.step" class="method-card glass-card">
+                        <div class="method-icon">{{ step.icon }}</div>
+                        <h3 class="method-title">{{ step.step }}</h3>
+                        <p class="method-desc">{{ step.details }}</p>
+                        <div class="method-tags">
+                            <span v-for="kp in step.keyPoints" :key="kp" class="method-tag">{{ kp }}</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 数据集概览 -->
+            <section id="datasets" class="datasets-section">
+                <div class="section-header glass-card">
+                    <h2 class="section-title">数据集概览</h2>
+                </div>
+                <div class="datasets-grid">
+                    <div v-for="ds in data.datasets" :key="ds.name" class="dataset-card glass-card">
+                        <div class="dataset-header">
+                            <h3>{{ ds.name }}</h3>
+                            <span class="dataset-count">{{ ds.count }} 条</span>
+                        </div>
+                        <p class="dataset-desc">{{ ds.description }}</p>
+                        <div class="dataset-table-wrapper">
+                            <table class="dataset-table">
+                                <thead>
+                                    <tr>
+                                        <th>职位</th>
+                                        <th>原始薪资</th>
+                                        <th>标准化(K)</th>
+                                        <th>城市</th>
+                                        <th>学历</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(row, idx) in ds.sample" :key="idx">
+                                        <td>{{ row.pos }}</td>
+                                        <td class="raw-salary">{{ row.rawSalary }}</td>
+                                        <td class="clean-salary">{{ row.cleanedSalary }}</td>
+                                        <td>{{ row.city }}</td>
+                                        <td>{{ row.edu }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 可视化与分析故事 -->
+            <section id="gallery" class="gallery-section">
+                <div class="section-header glass-card">
+                    <h2 class="section-title">可视化分析故事</h2>
+                </div>
+                
+                <div v-for="chapter in data.story" :key="chapter.id" class="story-chapter">
+                    <div class="chapter-header glass-card">
+                        <h3 class="chapter-title">{{ chapter.title }}</h3>
+                        <p class="chapter-subtitle">{{ chapter.subtitle }}</p>
+                        <p class="chapter-desc">{{ chapter.description }}</p>
+                        
+                        <!-- 关键发现列表 -->
+                        <div class="key-findings">
+                            <h4>🔍 关键发现</h4>
+                            <ul>
+                                <li v-for="(finding, idx) in chapter.keyFindings" :key="idx">{{ finding }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 图片画廊 -->
+                    <div class="gallery-grid">
+                        <div v-for="img in chapter.images" :key="img.src" class="gallery-item glass-card" @click="openModal(img)">
+                            <div class="img-wrapper">
+                                <img :src="img.src" :alt="img.title" loading="lazy">
+                                <span class="source-badge" :class="getSourceClass(img.source)">{{ img.source }}</span>
+                            </div>
+                            <div class="img-info">
+                                <p class="img-title">{{ img.title }}</p>
+                                <p class="img-explanation">{{ img.explanation }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 交互式 HTML 图表 -->
+                    <div v-if="chapter.interactiveCharts && chapter.interactiveCharts.length > 0" class="interactive-charts-section">
+                        <h4 class="interactive-header">🖱️ 交互式可视化</h4>
+                        <div class="interactive-grid">
+                            <div v-for="chart in chapter.interactiveCharts" :key="chart.src" class="interactive-chart-item glass-card">
+                                <div class="chart-header">
+                                    <span class="chart-title">{{ chart.title }}</span>
+                                    <span class="source-badge" :class="getSourceClass(chart.source)">{{ chart.source }}</span>
+                                </div>
+                                <div class="iframe-wrapper">
+                                    <iframe :src="chart.src" frameborder="0" allowfullscreen loading="lazy"></iframe>
+                                </div>
+                                <p class="chart-explanation">{{ chart.explanation }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 章节洞察 -->
+                    <div class="chapter-insight glass-card">
+                        <div class="insight-icon">💡</div>
+                        <p class="insight-text">{{ chapter.insight }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 结论与建议 -->
+            <section id="conclusion" class="conclusion-section">
+                <div class="section-header glass-card">
+                    <h2 class="section-title">{{ data.conclusion.title }}</h2>
+                    <p class="section-subtitle">{{ data.conclusion.subtitle }}</p>
+                </div>
+                
+                <div class="conclusion-grid">
+                    <div class="conclusion-card glass-card">
+                        <h3>👤 给求职者的建议</h3>
+                        <ul>
+                            <li v-for="(advice, idx) in data.conclusion.forJobSeekers" :key="idx">{{ advice }}</li>
+                        </ul>
+                    </div>
+                    <div class="conclusion-card glass-card">
+                        <h3>🏢 给企业的建议</h3>
+                        <ul>
+                            <li v-for="(advice, idx) in data.conclusion.forEmployers" :key="idx">{{ advice }}</li>
+                        </ul>
+                    </div>
+                    <div class="conclusion-card glass-card limitations">
+                        <h3>⚠️ 研究局限性</h3>
+                        <ul>
+                            <li v-for="(limit, idx) in data.conclusion.limitations" :key="idx">{{ limit }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ==================== 演示模式 ==================== -->
+        <main v-else class="presentation-mode">
+            <div class="slide-container glass-card">
+                <!-- 介绍页 -->
+                <div v-if="currentSlide.type === 'intro'" class="slide slide-intro">
+                    <h1 class="slide-main-title">{{ currentSlide.content.title }}</h1>
+                    <p class="slide-subtitle">{{ currentSlide.content.subtitle }}</p>
+                    <div class="slide-stats">
+                        <div v-for="stat in currentSlide.content.stats" :key="stat.label" class="slide-stat">
+                            <span class="stat-value">{{ stat.value }}</span>
+                            <span class="stat-unit">{{ stat.unit }}</span>
+                            <span class="stat-label">{{ stat.label }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 逻辑架构页 -->
+                <div v-else-if="currentSlide.type === 'logic'" class="slide slide-logic">
+                    <h2 class="slide-title">{{ currentSlide.content.title }}</h2>
+                    <p class="slide-desc">{{ currentSlide.content.description }}</p>
+                    <div class="slide-logic-grid">
+                        <div v-for="item in currentSlide.content.items" :key="item.type" class="slide-logic-item">
+                            <div class="logic-icon">{{ item.icon }}</div>
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.desc }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据清洗页 -->
+                <div v-else-if="currentSlide.type === 'transform'" class="slide slide-transform">
+                    <h2 class="slide-title">{{ currentSlide.content.title }}</h2>
+                    <p class="slide-desc">{{ currentSlide.content.subtitle }}</p>
+                    <div class="slide-transform-examples">
+                        <div v-for="ex in currentSlide.content.salaryExamples" :key="ex.original" class="transform-example">
+                            <span class="ex-original">{{ ex.original }}</span>
+                            <span class="ex-arrow">→</span>
+                            <span class="ex-cleaned">{{ ex.cleaned }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 回归公式页 -->
+                <div v-else-if="currentSlide.type === 'regression'" class="slide slide-regression">
+                    <h2 class="slide-title">{{ currentSlide.content.title }}</h2>
+                    <div class="slide-formula">
+                        <span class="formula-text">{{ currentSlide.content.formula }}</span>
+                    </div>
+                    <div class="slide-coef-grid">
+                        <div v-for="coef in currentSlide.content.coefficients" :key="coef.name" 
+                             class="slide-coef-item" :class="{ 'highlight': coef.value > 50 }">
+                            <span class="coef-name">{{ coef.name }}</span>
+                            <span class="coef-value">{{ coef.value }}</span>
+                        </div>
+                    </div>
+                    <div class="slide-insight">
+                        <p>{{ currentSlide.content.keyInsight }}</p>
+                    </div>
+                </div>
+
+                <!-- 方法论页 -->
+                <div v-else-if="currentSlide.type === 'methodology'" class="slide slide-methodology">
+                    <h2 class="slide-title">研究方法论</h2>
+                    <div class="slide-method-grid">
+                        <div v-for="step in currentSlide.content" :key="step.step" class="slide-method-item">
+                            <span class="method-icon">{{ step.icon }}</span>
+                            <h3>{{ step.step }}</h3>
+                            <p>{{ step.details }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 章节介绍页 -->
+                <div v-else-if="currentSlide.type === 'chapter'" class="slide slide-chapter">
+                    <h2 class="slide-title">{{ currentSlide.content.title }}</h2>
+                    <p class="slide-subtitle">{{ currentSlide.content.subtitle }}</p>
+                    <p class="slide-desc">{{ currentSlide.content.description }}</p>
+                    <div class="slide-findings">
+                        <h4>关键发现</h4>
+                        <ul>
+                            <li v-for="(finding, idx) in currentSlide.content.keyFindings" :key="idx">{{ finding }}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 图片页 -->
+                <div v-else-if="currentSlide.type === 'image'" class="slide slide-image">
+                    <div class="slide-image-container">
+                        <img :src="currentSlide.content.src" :alt="currentSlide.content.title">
+                    </div>
+                    <div class="slide-image-info">
+                        <h3>{{ currentSlide.content.title }}</h3>
+                        <span class="slide-source" :class="getSourceClass(currentSlide.content.source)">{{ currentSlide.content.source }}</span>
+                        <p class="slide-explanation">{{ currentSlide.content.explanation }}</p>
+                    </div>
+                </div>
+
+                <!-- 交互式图表页 -->
+                <div v-else-if="currentSlide.type === 'interactive'" class="slide slide-interactive">
+                    <div class="slide-interactive-container">
+                        <iframe :src="currentSlide.content.src" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="slide-interactive-info">
+                        <h3>{{ currentSlide.content.title }}</h3>
+                        <span class="slide-source" :class="getSourceClass(currentSlide.content.source)">{{ currentSlide.content.source }}</span>
+                        <p class="slide-explanation">{{ currentSlide.content.explanation }}</p>
+                    </div>
+                </div>
+
+                <!-- 章节洞察页 -->
+                <div v-else-if="currentSlide.type === 'insight'" class="slide slide-insight-page">
+                    <h2 class="slide-title">{{ currentSlide.chapterTitle }} - 洞察</h2>
+                    <div class="slide-insight-content">
+                        <div class="insight-icon-large">💡</div>
+                        <p class="insight-text-large">{{ currentSlide.content }}</p>
+                    </div>
+                </div>
+
+                <!-- 结论页 -->
+                <div v-else-if="currentSlide.type === 'conclusion'" class="slide slide-conclusion">
+                    <h2 class="slide-title">{{ currentSlide.content.title }}</h2>
+                    <div class="slide-conclusion-grid">
+                        <div class="conclusion-col">
+                            <h4>👤 求职者建议</h4>
+                            <ul>
+                                <li v-for="(a, i) in currentSlide.content.forJobSeekers" :key="i">{{ a }}</li>
+                            </ul>
+                        </div>
+                        <div class="conclusion-col">
+                            <h4>🏢 企业建议</h4>
+                            <ul>
+                                <li v-for="(a, i) in currentSlide.content.forEmployers" :key="i">{{ a }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 演示控制栏 -->
+            <div class="presentation-controls glass-card">
+                <button @click="prevSlide" :disabled="currentSlideIndex === 0" class="ctrl-btn">
+                    <span class="key-hint">←</span> 上一页
+                </button>
+                <div class="slide-progress">
+                    <span class="current">{{ currentSlideIndex + 1 }}</span>
+                    <span class="divider">/</span>
+                    <span class="total">{{ slides.length }}</span>
+                </div>
+                <button @click="nextSlide" :disabled="currentSlideIndex === slides.length - 1" class="ctrl-btn">
+                    下一页 <span class="key-hint">→</span>
+                </button>
+            </div>
+        </main>
+
+        <!-- 图片模态框 -->
+        <div v-if="showModal" class="modal-overlay" @click="closeModal">
+            <div class="modal-content glass-card" @click.stop>
+                <button class="modal-close" @click="closeModal">✕</button>
+                <img :src="modalImage.src" :alt="modalImage.title">
+                <div class="modal-info">
+                    <h3>{{ modalImage.title }}</h3>
+                    <span class="modal-source" :class="getSourceClass(modalImage.source)">{{ modalImage.source }}</span>
+                    <p>{{ modalImage.explanation }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./js/app.js"></script>
+</body>
+</html>
