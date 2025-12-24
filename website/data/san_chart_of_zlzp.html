@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>岗位-薪资等级桑基图</title>
+                <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+
+    
+</head>
+<body >
+    <div id="cb2ce5e630c74d5bbd35877b732873ba" class="chart-container" style="width:1000px; height:600px; "></div>
+    <script>
+        var chart_cb2ce5e630c74d5bbd35877b732873ba = echarts.init(
+            document.getElementById('cb2ce5e630c74d5bbd35877b732873ba'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_cb2ce5e630c74d5bbd35877b732873ba = {
+    "backgroundColor": "white",
+    "animation": true,
+    "animationThreshold": 2000,
+    "animationDuration": 1000,
+    "animationEasing": "cubicOut",
+    "animationDelay": 0,
+    "animationDurationUpdate": 300,
+    "animationEasingUpdate": "cubicOut",
+    "animationDelayUpdate": 0,
+    "aria": {
+        "enabled": false
+    },
+    "color": [
+        "#80b1d3",
+        "#fdb462",
+        "#b3de69",
+        "#fb8072",
+        "#bc80bd"
+    ],
+    "series": [
+        {
+            "type": "sankey",
+            "data": [
+                {
+                    "name": "\u4ea7\u54c1"
+                },
+                {
+                    "name": "\u4fdd\u9669"
+                },
+                {
+                    "name": "\u54a8\u8be2"
+                },
+                {
+                    "name": "\u5546\u4e1a/\u6570\u636e\u5206\u6790"
+                },
+                {
+                    "name": "\u57fa\u91d1"
+                },
+                {
+                    "name": "\u6295\u884c"
+                },
+                {
+                    "name": "\u8bc1\u5238"
+                },
+                {
+                    "name": "\u8d22\u52a1"
+                },
+                {
+                    "name": "\u8fd0\u8425"
+                },
+                {
+                    "name": "\u91cf\u5316"
+                },
+                {
+                    "name": "\u94f6\u884c"
+                },
+                {
+                    "name": "\u85aa\u8d44\u7b49\u7ea7: \u22648K"
+                },
+                {
+                    "name": "\u85aa\u8d44\u7b49\u7ea7: 8-12K"
+                },
+                {
+                    "name": "\u85aa\u8d44\u7b49\u7ea7: 12-18K"
+                },
+                {
+                    "name": "\u85aa\u8d44\u7b49\u7ea7: 18-25K"
+                },
+                {
+                    "name": "\u85aa\u8d44\u7b49\u7ea7: >25K"
+                }
+            ],
+            "links": [
+                {
+                    "source": "\u4ea7\u54c1",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 12-18K",
+                    "value": 16.9
+                },
+                {
+                    "source": "\u4fdd\u9669",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 18-25K",
+                    "value": 18.2
+                },
+                {
+                    "source": "\u54a8\u8be2",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 12-18K",
+                    "value": 16.5
+                },
+                {
+                    "source": "\u5546\u4e1a/\u6570\u636e\u5206\u6790",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 12-18K",
+                    "value": 16.1
+                },
+                {
+                    "source": "\u57fa\u91d1",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 18-25K",
+                    "value": 22.5
+                },
+                {
+                    "source": "\u6295\u884c",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: >25K",
+                    "value": 42.7
+                },
+                {
+                    "source": "\u8bc1\u5238",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 12-18K",
+                    "value": 15.9
+                },
+                {
+                    "source": "\u8d22\u52a1",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 12-18K",
+                    "value": 14.8
+                },
+                {
+                    "source": "\u8fd0\u8425",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 12-18K",
+                    "value": 13.3
+                },
+                {
+                    "source": "\u91cf\u5316",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 18-25K",
+                    "value": 23.0
+                },
+                {
+                    "source": "\u94f6\u884c",
+                    "target": "\u85aa\u8d44\u7b49\u7ea7: 12-18K",
+                    "value": 13.6
+                }
+            ],
+            "left": "5%",
+            "top": "5%",
+            "right": "20%",
+            "bottom": "5%",
+            "nodeWidth": 20,
+            "nodeGap": 8,
+            "nodeAlign": "justify",
+            "orient": "horizontal",
+            "draggable": true,
+            "label": {
+                "show": true,
+                "color": "#374151",
+                "margin": 8,
+                "fontSize": 12,
+                "valueAnimation": false
+            },
+            "lineStyle": {
+                "show": true,
+                "width": 1,
+                "opacity": 0.6,
+                "curveness": 0.45,
+                "type": "solid",
+                "color": "source"
+            },
+            "itemStyle": {
+                "borderColor": "#ddd",
+                "borderWidth": 1
+            }
+        }
+    ],
+    "legend": [
+        {
+            "data": [
+                ""
+            ],
+            "selected": {},
+            "show": false,
+            "padding": 5,
+            "itemGap": 10,
+            "itemWidth": 25,
+            "itemHeight": 14,
+            "backgroundColor": "transparent",
+            "borderColor": "#ccc",
+            "borderRadius": 0,
+            "pageButtonItemGap": 5,
+            "pageButtonPosition": "end",
+            "pageFormatter": "{current}/{total}",
+            "pageIconColor": "#2f4554",
+            "pageIconInactiveColor": "#aaa",
+            "pageIconSize": 15,
+            "animationDurationUpdate": 800,
+            "selector": false,
+            "selectorPosition": "auto",
+            "selectorItemGap": 7,
+            "selectorButtonGap": 10
+        }
+    ],
+    "tooltip": {
+        "show": true,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
+        "axisPointer": {
+            "type": "line"
+        },
+        "showContent": true,
+        "alwaysShowContent": false,
+        "showDelay": 0,
+        "hideDelay": 100,
+        "enterable": false,
+        "confine": false,
+        "appendToBody": false,
+        "transitionDuration": 0.4,
+        "formatter": "{a} \u279d {b}",
+        "textStyle": {
+            "fontSize": 14
+        },
+        "borderWidth": 0,
+        "padding": 5,
+        "order": "seriesAsc"
+    },
+    "title": [
+        {
+            "show": true,
+            "text": "\u5546\u79d1\u7ec6\u5206\u5c97\u4f4d \u2192 \u85aa\u8d44\u7b49\u7ea7\u6d41\u5411 (\u6851\u57fa\u56fe)",
+            "target": "blank",
+            "subtarget": "blank",
+            "left": "center",
+            "padding": [
+                8,
+                0,
+                0,
+                0
+            ],
+            "itemGap": 10,
+            "textAlign": "auto",
+            "textVerticalAlign": "auto",
+            "triggerEvent": false
+        }
+    ]
+};
+        chart_cb2ce5e630c74d5bbd35877b732873ba.setOption(option_cb2ce5e630c74d5bbd35877b732873ba);
+    </script>
+</body>
+</html>
