@@ -13,6 +13,13 @@ METRIC_DEFINITIONS: dict[str, dict[str, Any]] = {
         "required_filter": "salary_parse_status = 'success' AND salary_mid_monthly IS NOT NULL",
         "unit": "人民币/月",
     },
+    "median_monthly_salary": {
+        "label": "月薪中位数",
+        "definition": "去重后、薪资解析状态为 success 的职位月薪中点中位数",
+        "expression": "median(salary_mid_monthly)",
+        "required_filter": "salary_parse_status = 'success' AND salary_mid_monthly IS NOT NULL",
+        "unit": "人民币/月",
+    },
     "job_count": {
         "label": "岗位数量",
         "definition": "当前数据范围内去重后的唯一职位记录数；jobs_scoped 每行对应一个 job_key",

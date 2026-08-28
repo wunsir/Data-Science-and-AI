@@ -7,7 +7,7 @@ from pathlib import Path
 import secrets
 from typing import Any
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -45,7 +45,7 @@ def create_app(
     application = FastAPI(
         title="招聘数据分析平台",
         version=__version__,
-        description="2025年末历史样本、公开 ATS 快照与证据约束 Data Agent。",
+        description="2025年末历史样本与证据约束 Data Agent；ATS 刷新仅作实验保留。",
     )
     application.state.db_path = resolved_db_path
     application.state.agent = DataAgent(resolved_db_path, llm=llm)
@@ -128,7 +128,9 @@ def create_app(
             "database": database,
             "model": {
                 "status": model_status,
-                "name": os.getenv("LLM_MODEL", "qwen-plus"),
+                "name": getattr(
+                    agent.llm, "model", os.getenv("LLM_MODEL", "deepseek-ai/DeepSeek-V3.2")
+                ),
             },
         }
 
@@ -136,12 +138,11 @@ def create_app(
     def meta(request: Request) -> dict[str, Any]:
         agent: DataAgent = request.app.state.agent
         coverage: dict[str, Any] = {}
+        experimental_live: dict[str, Any] = {}
         coverage_error: str | None = None
         try:
-            coverage = {
-                "historical": agent.runner.coverage("historical"),
-                "live": agent.runner.coverage("live"),
-            }
+            coverage = {"historical": agent.runner.coverage("historical")}
+            experimental_live = agent.runner.coverage("live")
             dataset = agent.runner.dataset_metadata()
         except AgentError as exc:
             coverage_error = str(exc)
@@ -154,14 +155,17 @@ def create_app(
             "coverage": coverage,
             "coverage_error": coverage_error,
             "model_available": agent.model_available,
-            "scope_options": ["historical", "live", "compare"],
+            "scope_options": ["historical"],
             "scope_behavior": {
                 "default": "historical",
-                "latest_terms": "live",
-                "cross_scope_comparison": "compare",
+                "public": "historical_only",
+                "experimental_scopes": ["live", "compare"],
             },
             "metric_definitions": METRIC_DEFINITIONS,
             "live": {
+                "status": "experimental",
+                "agent_scope_public": False,
+                "coverage": experimental_live,
                 "boards": [
                     {"id": board, "name": name} for board, name in BOARD_NAMES.items()
                 ],
@@ -178,17 +182,22 @@ def create_app(
                 "2025年末样本中，不同岗位类别的平均月薪是多少？",
                 "上海和深圳的数据岗位薪资分布有何差异？",
                 "本项目样本中最常见的技能是什么？",
-                "最新公开职位按公司如何分布？",
-                "当前北京有哪些公开职位？",
-                "比较2025年末样本和最新快照的岗位类别构成。",
             ],
         }
 
     @application.post("/api/ask", response_model=AskResponse)
     def ask(payload: AskRequest, request: Request) -> AskResponse:
+        if payload.scope_override not in (None, "historical"):
+            raise HTTPException(
+                status_code=422,
+                detail={
+                    "code": "scope_not_available",
+                    "message": "公网 Data Agent 当前只提供 historical 历史样本查询。",
+                },
+            )
         request.app.state.rate_limiter.check("ask", request.state.session_id)
         agent: DataAgent = request.app.state.agent
-        return agent.ask(payload.question, payload.scope_override)
+        return agent.ask(payload.question, "historical")
 
     @application.post("/api/live/refresh", response_model=LiveRefreshResponse)
     def refresh(payload: LiveRefreshRequest, request: Request) -> LiveRefreshResponse:

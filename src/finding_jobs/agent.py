@@ -78,7 +78,7 @@ class LLM(Protocol):
 
 
 class OpenAICompatibleLLM:
-    """DashScope/OpenAI-compatible client with structured query planning."""
+    """Provider-neutral OpenAI-compatible client with structured query planning."""
 
     def __init__(
         self,
@@ -86,13 +86,25 @@ class OpenAICompatibleLLM:
         api_key: str | None = None,
         base_url: str | None = None,
         model: str | None = None,
-        timeout_seconds: float = 25,
+        response_format: str | None = None,
+        enable_thinking: bool | None = None,
+        timeout_seconds: float = 45,
     ) -> None:
-        self.api_key = api_key or os.getenv("DASHSCOPE_API_KEY")
+        self.api_key = api_key or os.getenv("LLM_API_KEY") or os.getenv("DASHSCOPE_API_KEY")
         self.base_url = base_url or os.getenv(
-            "LLM_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1"
+            "LLM_BASE_URL", "https://api.siliconflow.cn/v1"
         )
-        self.model = model or os.getenv("LLM_MODEL", "qwen-plus")
+        self.model = model or os.getenv("LLM_MODEL", "deepseek-ai/DeepSeek-V3.2")
+        configured_format = response_format or os.getenv("LLM_RESPONSE_FORMAT", "json_schema")
+        self.response_format = configured_format.strip().lower()
+        if self.response_format not in {"json_schema", "json_object", "text"}:
+            raise ValueError("LLM_RESPONSE_FORMAT 必须是 json_schema、json_object 或 text")
+        if enable_thinking is None:
+            thinking_value = os.getenv("LLM_ENABLE_THINKING", "false").strip().lower()
+            self.enable_thinking = thinking_value in {"1", "true", "yes", "on"}
+        else:
+            self.enable_thinking = enable_thinking
+        self._is_siliconflow = "siliconflow.cn" in self.base_url.lower()
         self.timeout_seconds = timeout_seconds
         self._client: OpenAI | None = None
 
@@ -102,7 +114,7 @@ class OpenAICompatibleLLM:
 
     def _get_client(self) -> OpenAI:
         if not self.available:
-            raise ModelUnavailableError("未配置 DASHSCOPE_API_KEY，Data Agent 当前不可用")
+            raise ModelUnavailableError("未配置 LLM_API_KEY，Data Agent 当前不可用")
         if self._client is None:
             self._client = OpenAI(
                 api_key=self.api_key,
@@ -151,22 +163,38 @@ class OpenAICompatibleLLM:
         )
         prompt = (
             f"问题：{question}\n固定范围：{scope_hint}\n"
-            f"jobs_scoped 可用列：{', '.join(columns)}"
+            f"jobs_scoped 可用列：{', '.join(columns)}\n"
+            "只返回一个符合下列 JSON Schema 的 JSON 对象，不要使用 Markdown 代码块：\n"
+            + json.dumps(response_schema["schema"], ensure_ascii=False)
         )
         try:
-            response = self._get_client().chat.completions.create(
-                model=self.model,
-                messages=[
+            response_format: dict[str, Any] | None
+            if self.response_format == "json_schema":
+                response_format = {"type": "json_schema", "json_schema": response_schema}
+            elif self.response_format == "json_object":
+                response_format = {"type": "json_object"}
+            else:
+                response_format = None
+            request: dict[str, Any] = {
+                "model": self.model,
+                "messages": [
                     {"role": "system", "content": system},
                     {"role": "user", "content": prompt},
                 ],
-                response_format={"type": "json_schema", "json_schema": response_schema},
-                temperature=0,
+                "temperature": 0,
+                "max_tokens": 1200,
+            }
+            if response_format is not None:
+                request["response_format"] = response_format
+            if self._is_siliconflow:
+                request["extra_body"] = {"enable_thinking": self.enable_thinking}
+            response = self._get_client().chat.completions.create(
+                **request,
             )
             content = response.choices[0].message.content
             if not content:
                 raise ValueError("empty response")
-            value = json.loads(content)
+            value = _parse_json_object(content)
         except ModelUnavailableError:
             raise
         except Exception as exc:
@@ -196,6 +224,7 @@ class OpenAICompatibleLLM:
             "你是证据约束的招聘数据分析助手。只能根据提供的查询结果回答，"
             "所有数字必须能在结果行中直接定位。不得声称因果关系、全国代表性或时间趋势。"
             "如果结果为空就明确说没有匹配记录。compare 只并列描述两组结果及口径差异。"
+            "不要复述数据覆盖范围或警告中的年份、样本量，也不要自行计算结果行中没有的数字。"
             "用简洁中文回答，不输出 SQL。"
         )
         prompt = json.dumps(
@@ -203,20 +232,24 @@ class OpenAICompatibleLLM:
                 "question": question,
                 "scope": scope,
                 "evidence": evidence,
-                "coverage": coverage,
-                "warnings": list(warnings),
             },
             ensure_ascii=False,
             default=str,
         )
         try:
-            response = self._get_client().chat.completions.create(
-                model=self.model,
-                messages=[
+            request: dict[str, Any] = {
+                "model": self.model,
+                "messages": [
                     {"role": "system", "content": system},
                     {"role": "user", "content": prompt},
                 ],
-                temperature=0,
+                "temperature": 0,
+                "max_tokens": 900,
+            }
+            if self._is_siliconflow:
+                request["extra_body"] = {"enable_thinking": self.enable_thinking}
+            response = self._get_client().chat.completions.create(
+                **request,
             )
             content = response.choices[0].message.content
         except ModelUnavailableError:
@@ -226,6 +259,27 @@ class OpenAICompatibleLLM:
         if not content or not content.strip():
             raise InvalidModelOutputError("模型返回了空回答")
         return content.strip()
+
+
+class _MedianAggregate:
+    def __init__(self) -> None:
+        self.values: list[float] = []
+
+    def step(self, value: Any) -> None:
+        if value is None:
+            return
+        numeric = float(value)
+        if math.isfinite(numeric):
+            self.values.append(numeric)
+
+    def finalize(self) -> float | None:
+        if not self.values:
+            return None
+        self.values.sort()
+        midpoint = len(self.values) // 2
+        if len(self.values) % 2:
+            return self.values[midpoint]
+        return (self.values[midpoint - 1] + self.values[midpoint]) / 2
 
 
 @dataclass(slots=True)
@@ -244,6 +298,7 @@ class SQLiteQueryRunner:
             timeout=1,
         )
         connection.row_factory = sqlite3.Row
+        connection.create_aggregate("median", 1, _MedianAggregate)
         return connection
 
     def columns(self) -> list[str]:
@@ -407,6 +462,7 @@ def _sqlite_authorizer(
             "log",
             "lower",
             "max",
+            "median",
             "min",
             "nullif",
             "power",
@@ -509,13 +565,26 @@ class DataAgent:
             raise ModelUnavailableError("未配置模型密钥，Data Agent 当前不可用")
 
         columns = self.runner.columns()
-        plan = self.llm.plan(question, scope, columns)
-        planned_scope, planned_queries = _validate_plan(plan, scope)
-        queries = [self.runner.execute(sql, query_scope) for query_scope, sql in planned_queries]
-        if any(query.truncated for query in queries):
-            warning_list.append("查询结果超过200行，接口仅返回前200行。")
-        answer = self.llm.answer(question, planned_scope, queries, coverage, warning_list)
-        validate_answer_numbers(answer, queries)
+        planned_scope: Scope | None = None
+        queries: list[QueryResult] = []
+        answer: str | None = None
+        try:
+            plan = self.llm.plan(question, scope, columns)
+            planned_scope, planned_queries = _validate_plan(plan, scope)
+            for query_scope, sql in planned_queries:
+                queries.append(self.runner.execute(sql, query_scope))
+            if any(query.truncated for query in queries):
+                warning_list.append("查询结果超过200行，接口仅返回前200行。")
+            answer = self.llm.answer(question, planned_scope, queries, coverage, warning_list)
+            validate_answer_numbers(answer, queries)
+        except AgentError as exc:
+            exc.partial_scope = planned_scope
+            exc.partial_queries = queries
+            exc.partial_answer = answer
+            exc.partial_coverage = coverage
+            exc.partial_warnings = warning_list
+            raise
+        assert planned_scope is not None and answer is not None
         return AskResponse(
             scope=planned_scope,
             answer=answer,
@@ -631,3 +700,20 @@ def _json_value(value: Any) -> Any:
     if isinstance(value, (datetime,)):
         return value.astimezone(timezone.utc).isoformat()
     return str(value)
+
+
+def _parse_json_object(content: str) -> Any:
+    """Parse provider output while tolerating an otherwise valid fenced object."""
+
+    value = content.strip()
+    if value.startswith("```"):
+        value = re.sub(r"^```(?:json)?\s*", "", value, flags=re.IGNORECASE)
+        value = re.sub(r"\s*```$", "", value)
+    try:
+        return json.loads(value)
+    except json.JSONDecodeError:
+        first = value.find("{")
+        last = value.rfind("}")
+        if first < 0 or last <= first:
+            raise
+        return json.loads(value[first : last + 1])

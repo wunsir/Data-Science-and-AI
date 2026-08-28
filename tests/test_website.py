@@ -24,6 +24,19 @@ class WebsiteStructureTests(unittest.TestCase):
         self.assertIn("./js/story-app.js", macro)
         self.assertIn("./js/story-app.js", micro)
 
+    def test_historical_agent_overlay_is_shared_without_agent_charts(self) -> None:
+        pages = [
+            (WEBSITE / name).read_text(encoding="utf-8")
+            for name in ("index.html", "macro.html", "micro.html")
+        ]
+        for page in pages:
+            self.assertIn('class="agent-launcher"', page)
+            self.assertIn('class="agent-panel"', page)
+
+        app = (WEBSITE / "js" / "story-app.js").read_text(encoding="utf-8")
+        self.assertIn('scope_override: "historical"', app)
+        self.assertNotIn("agentResponse.chart", app)
+
     def test_story_registry_has_exactly_29_unique_figure_slots(self) -> None:
         story = (WEBSITE / "js" / "story-data.js").read_text(encoding="utf-8")
         image_ids = re.findall(r'^\s*image\("([^"]+)"', story, flags=re.MULTILINE)

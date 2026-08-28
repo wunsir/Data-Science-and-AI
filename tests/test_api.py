@@ -64,6 +64,9 @@ def test_health_meta_and_agent_api(tmp_path):
     meta = client.get("/api/meta")
     assert meta.status_code == 200
     assert meta.json()["dataset_version"] == "test-v1"
+    assert meta.json()["scope_options"] == ["historical"]
+    assert meta.json()["live"]["status"] == "experimental"
+    assert meta.json()["live"]["agent_scope_public"] is False
     assert {item["id"] for item in meta.json()["live"]["boards"]} == {
         "xsolla",
         "coins",
@@ -77,6 +80,22 @@ def test_health_meta_and_agent_api(tmp_path):
     assert payload["scope"] == "historical"
     assert payload["sql"] == [payload["queries"][0]["sql"]]
     assert payload["queries"][0]["rows"][0]["job_count"] == 2
+
+
+def test_public_agent_forces_historical_and_rejects_experimental_scopes(tmp_path):
+    client = make_client(make_database(tmp_path / "jobs.sqlite"))
+
+    forced = client.post("/api/ask", json={"question": "当前有哪些岗位？"})
+    assert forced.status_code == 200
+    assert forced.json()["scope"] == "historical"
+
+    for scope in ("live", "compare"):
+        blocked = client.post(
+            "/api/ask",
+            json={"question": "测试范围", "scope_override": scope},
+        )
+        assert blocked.status_code == 422
+        assert blocked.json()["detail"]["code"] == "scope_not_available"
 
 
 def test_missing_model_returns_explicit_unavailable(tmp_path):

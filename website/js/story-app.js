@@ -17,6 +17,7 @@ function setupParticleCanvas() {
     let resizeFrame = 0;
     let pageVisible = !document.hidden;
     let heroVisible = true;
+    let agentVisible = false;
     const mouse = { x: null, y: null };
 
     class Particle {
@@ -105,15 +106,15 @@ function setupParticleCanvas() {
 
     const animate = () => {
         animationFrame = 0;
-        if (!pageVisible || !heroVisible || reducedMotion) return;
+        if (!pageVisible || !heroVisible || agentVisible || reducedMotion) return;
         drawFrame(true);
         animationFrame = requestAnimationFrame(animate);
     };
 
     const syncAnimation = () => {
-        if (pageVisible && heroVisible && !reducedMotion && !animationFrame) {
+        if (pageVisible && heroVisible && !agentVisible && !reducedMotion && !animationFrame) {
             animationFrame = requestAnimationFrame(animate);
-        } else if ((!pageVisible || !heroVisible || reducedMotion) && animationFrame) {
+        } else if ((!pageVisible || !heroVisible || agentVisible || reducedMotion) && animationFrame) {
             cancelAnimationFrame(animationFrame);
             animationFrame = 0;
         }
@@ -135,6 +136,10 @@ function setupParticleCanvas() {
         pageVisible = !document.hidden;
         syncAnimation();
     };
+    const onAgentVisibility = (event) => {
+        agentVisible = Boolean(event.detail?.open);
+        syncAnimation();
+    };
 
     const observer = new IntersectionObserver(([entry]) => {
         heroVisible = entry.isIntersecting;
@@ -145,6 +150,7 @@ function setupParticleCanvas() {
     window.addEventListener("pointermove", onPointerMove, { passive: true });
     document.addEventListener("pointerleave", clearPointer);
     document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("data-agent-visibility", onAgentVisibility);
     observer.observe(hero);
     rebuild();
     syncAnimation();
@@ -157,6 +163,7 @@ function setupParticleCanvas() {
         window.removeEventListener("pointermove", onPointerMove);
         document.removeEventListener("pointerleave", clearPointer);
         document.removeEventListener("visibilitychange", onVisibility);
+        window.removeEventListener("data-agent-visibility", onAgentVisibility);
     };
 }
 
@@ -168,10 +175,25 @@ createApp({
         const menuOpen = ref(false);
         const lightboxOpen = ref(false);
         const activeFigure = ref(null);
+        const agentOpen = ref(false);
+        const agentAvailability = ref("checking");
+        const agentQuestion = ref("");
+        const agentPending = ref(false);
+        const agentResponse = ref(null);
+        const agentError = ref("");
+        const agentCloseButton = ref(null);
+        const agentQuestionInput = ref(null);
+        const agentPresets = [
+            "不同岗位类别的职位数量和平均月薪是多少？",
+            "北京、上海、深圳的数据岗位薪资有何差异？",
+            "三家平台的可分析薪资记录分别有多少？"
+        ];
         let revealObserver = null;
         let cleanupParticles = () => {};
         let lastTrigger = null;
 
+        let agentTrigger = null;
+        let agentAbortController = null;
         const pageStats = computed(() => [
             { label: "原始记录", value: metrics.value.rawRows },
             { label: "去重职位", value: metrics.value.uniqueJobs },
@@ -184,6 +206,31 @@ createApp({
         })));
 
         const isActive = (page) => page === currentPage;
+        const agentStatusText = computed(() => {
+            const labels = {
+                checking: "正在检查数据服务",
+                ready: "Data Agent 可用",
+                model_unavailable: "模型尚未配置",
+                offline: "当前为静态展示"
+            };
+            return labels[agentAvailability.value] || labels.offline;
+        });
+
+        const agentCanAsk = computed(() => (
+            agentAvailability.value === "ready"
+            && !agentPending.value
+            && agentQuestion.value.trim().length >= 2
+        ));
+
+        const agentCoverageText = computed(() => {
+            const coverage = agentResponse.value?.coverage;
+            if (!coverage) return "2025 年末历史采集样本";
+            const label = coverage.label || "2025 年末历史采集样本";
+            const rowCount = Number(coverage.row_count || 0);
+            if (!rowCount) return label;
+            return label + " · " + rowCount.toLocaleString("zh-CN") + " 个去重职位";
+        });
+
 
         const loadSummary = async () => {
             try {
@@ -208,6 +255,109 @@ createApp({
             });
         };
 
+        const checkAgentAvailability = async () => {
+            try {
+                const response = await fetch("./api/health", {
+                    cache: "no-store",
+                    headers: { Accept: "application/json" }
+                });
+                const contentType = response.headers.get("content-type") || "";
+                if (!response.ok || !contentType.includes("application/json")) {
+                    throw new Error("API unavailable");
+                }
+                const health = await response.json();
+                if (health.database?.status !== "ready") {
+                    agentAvailability.value = "offline";
+                } else if (health.model?.status !== "ready") {
+                    agentAvailability.value = "model_unavailable";
+                } else {
+                    agentAvailability.value = "ready";
+                }
+            } catch {
+                agentAvailability.value = "offline";
+            }
+        };
+
+        const openAgent = (event) => {
+            agentTrigger = event?.currentTarget || null;
+            agentOpen.value = true;
+            document.body.classList.add("agent-open");
+            window.dispatchEvent(new CustomEvent("data-agent-visibility", {
+                detail: { open: true }
+            }));
+            nextTick(() => {
+                if (agentAvailability.value === "ready") {
+                    agentQuestionInput.value?.focus();
+                } else {
+                    agentCloseButton.value?.focus();
+                }
+            });
+        };
+
+        const closeAgent = () => {
+            agentOpen.value = false;
+            document.body.classList.remove("agent-open");
+            window.dispatchEvent(new CustomEvent("data-agent-visibility", {
+                detail: { open: false }
+            }));
+            nextTick(() => agentTrigger?.focus());
+        };
+
+        const formatAgentCell = (value) => {
+            if (value === null || value === undefined || value === "") return "—";
+            if (typeof value === "number") {
+                return value.toLocaleString("zh-CN", { maximumFractionDigits: 4 });
+            }
+            if (typeof value === "object") return JSON.stringify(value);
+            return String(value);
+        };
+
+        const askAgent = async (presetQuestion) => {
+            if (typeof presetQuestion === "string") agentQuestion.value = presetQuestion;
+            const question = agentQuestion.value.trim();
+            if (agentAvailability.value !== "ready" || question.length < 2) return;
+
+            agentAbortController?.abort();
+            agentAbortController = new AbortController();
+            agentPending.value = true;
+            agentError.value = "";
+            agentResponse.value = null;
+            try {
+                const response = await fetch("./api/ask", {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        question,
+                        scope_override: "historical"
+                    }),
+                    signal: agentAbortController.signal
+                });
+                let payload = null;
+                try {
+                    payload = await response.json();
+                } catch {
+                    payload = null;
+                }
+                if (!response.ok) {
+                    const detail = payload?.detail;
+                    throw new Error(
+                        (typeof detail === "string" ? detail : detail?.message)
+                        || "请求失败（HTTP " + response.status + "）"
+                    );
+                }
+                agentResponse.value = payload;
+            } catch (error) {
+                if (error?.name !== "AbortError") {
+                    agentError.value = error?.message || "Data Agent 暂时不可用";
+                }
+            } finally {
+                agentPending.value = false;
+            }
+        };
+
         const openLightbox = (figure, event) => {
             if (figure.kind !== "image") return;
             activeFigure.value = figure;
@@ -225,13 +375,19 @@ createApp({
         };
 
         const handleKeydown = (event) => {
-            if (event.key === "Escape" && lightboxOpen.value) closeLightbox();
+            if (event.key !== "Escape") return;
+            if (agentOpen.value) {
+                closeAgent();
+                return;
+            }
+            if (lightboxOpen.value) closeLightbox();
         };
 
         onMounted(() => {
             loadSummary();
             window.addEventListener("keydown", handleKeydown);
             cleanupParticles = setupParticleCanvas();
+            checkAgentAvailability();
 
             const items = document.querySelectorAll(".reveal");
             if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -252,8 +408,15 @@ createApp({
         onUnmounted(() => {
             cleanupParticles();
             revealObserver?.disconnect();
+            agentAbortController?.abort();
             window.removeEventListener("keydown", handleKeydown);
             document.body.classList.remove("lightbox-open");
+            document.body.classList.remove("agent-open");
+            if (agentOpen.value) {
+                window.dispatchEvent(new CustomEvent("data-agent-visibility", {
+                    detail: { open: false }
+                }));
+            }
         });
 
         return {
@@ -267,6 +430,22 @@ createApp({
             heroTags,
             isActive,
             scrollToContent,
+            agentOpen,
+            agentAvailability,
+            agentQuestion,
+            agentPending,
+            agentResponse,
+            agentError,
+            agentCloseButton,
+            agentQuestionInput,
+            agentPresets,
+            agentStatusText,
+            agentCanAsk,
+            agentCoverageText,
+            openAgent,
+            closeAgent,
+            askAgent,
+            formatAgentCell,
             openLightbox,
             closeLightbox
         };

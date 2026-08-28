@@ -99,6 +99,116 @@
         <footer class="site-footer">
             <p>© 2025 Big Data Project · ZZH, CZW, LTY, WKZ</p>
         </footer>
+        <button class="agent-launcher" type="button" :aria-expanded="agentOpen"
+                aria-controls="data-agent-panel" :title="agentStatusText" @click="openAgent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                      d="M8 10h8M8 14h5m7-2a8 8 0 0 1-8 8H5l-3 2v-6.3A8 8 0 1 1 20 12Z"/>
+            </svg>
+            <span>问数据</span>
+        </button>
+
+        <div v-if="agentOpen" class="agent-backdrop" @click.self="closeAgent">
+            <aside id="data-agent-panel" class="agent-panel" role="dialog" aria-modal="true"
+                   aria-labelledby="data-agent-title">
+                <header class="agent-header">
+                    <div>
+                        <p class="agent-kicker">DATA AGENT</p>
+                        <h2 id="data-agent-title">问问这份招聘数据</h2>
+                    </div>
+                    <button ref="agentCloseButton" class="agent-close" type="button"
+                            aria-label="关闭 Data Agent" @click="closeAgent">×</button>
+                </header>
+
+                <div class="agent-body">
+                    <div class="agent-scope-row">
+                        <span class="agent-scope-badge">historical</span>
+                        <span>仅查询 2025 年末历史样本</span>
+                    </div>
+
+                    <p v-if="agentAvailability === 'checking'" class="agent-state">
+                        正在连接数据服务…
+                    </p>
+                    <p v-else-if="agentAvailability === 'offline'" class="agent-state">
+                        当前是静态展示页。启动项目后端后可使用 Data Agent，现有分析页面不受影响。
+                    </p>
+                    <p v-else-if="agentAvailability === 'model_unavailable'" class="agent-state">
+                        数据服务已连接，但尚未配置模型凭证。
+                    </p>
+
+                    <template v-else>
+                        <div v-if="!agentResponse && !agentPending" class="agent-presets"
+                             aria-label="示例问题">
+                            <button v-for="preset in agentPresets" :key="preset" type="button"
+                                    @click="askAgent(preset)">{{ preset }}</button>
+                        </div>
+
+                        <form class="agent-form" @submit.prevent="askAgent()">
+                            <label for="agent-question">问题</label>
+                            <textarea id="agent-question" ref="agentQuestionInput"
+                                      v-model="agentQuestion" maxlength="500" rows="3"
+                                      placeholder="例如：不同岗位类别的职位数量和平均月薪是多少？"></textarea>
+                            <div class="agent-form-footer">
+                                <span>最多 500 字</span>
+                                <button class="agent-submit" type="submit" :disabled="!agentCanAsk">
+                                    {{ agentPending ? "正在查询…" : "查询历史样本" }}
+                                </button>
+                            </div>
+                        </form>
+
+                        <p v-if="agentPending" class="agent-loading" role="status">
+                            正在生成并校验只读 SQL…
+                        </p>
+                        <p v-if="agentError" class="agent-error" role="alert">{{ agentError }}</p>
+
+                        <section v-if="agentResponse" class="agent-response" aria-live="polite">
+                            <div class="agent-coverage">
+                                <strong>数据范围</strong>
+                                <span>{{ agentCoverageText }}</span>
+                            </div>
+                            <p class="agent-answer">{{ agentResponse.answer }}</p>
+
+                            <div v-for="(query, queryIndex) in agentResponse.queries"
+                                 :key="queryIndex" class="agent-query">
+                                <h3>结果表 {{ queryIndex + 1 }}</h3>
+                                <div v-if="query.rows.length" class="agent-table-scroll">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th v-for="column in query.columns" :key="column">
+                                                    {{ column }}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr v-for="(row, rowIndex) in query.rows" :key="rowIndex">
+                                                <td v-for="column in query.columns" :key="column">
+                                                    {{ formatAgentCell(row[column]) }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p v-else class="agent-empty">没有匹配记录。</p>
+                                <p v-if="query.truncated" class="agent-truncated">
+                                    结果超过接口上限，仅返回前 200 行。
+                                </p>
+                                <details class="agent-sql">
+                                    <summary>查看只读 SQL</summary>
+                                    <pre>{{ query.sql }}</pre>
+                                </details>
+                            </div>
+
+                            <ul v-if="agentResponse.warnings.length" class="agent-warnings">
+                                <li v-for="warning in agentResponse.warnings" :key="warning">
+                                    {{ warning }}
+                                </li>
+                            </ul>
+                        </section>
+                    </template>
+                </div>
+            </aside>
+        </div>
     </div>
     <script type="module" src="./js/story-app.js"></script>
 </body>
