@@ -1,0 +1,727 @@
+{
+  "counts": {
+    "duplicate_rows_removed": 7877,
+    "files": 66,
+    "raw_rows": 44329,
+    "salary_analyzable_jobs": 34130,
+    "unique_jobs": 36452
+  },
+  "dataset_version": "historical-c8ca0e0c923f24c2",
+  "deduplication": {
+    "ambiguous_no_id_rows_not_bridged": 11,
+    "cross_platform_merge": false,
+    "fallback_groups": 32867,
+    "fallback_rule": "source + normalized title + company + city + salary text",
+    "id_bridge_rule": "a no-ID row joins an ID group only when its exact fingerprint maps to one distinct ID",
+    "no_id_rows_bridged_to_id_group": 1444,
+    "rows_removed_in_fallback_groups": 6433,
+    "rows_removed_in_source_id_groups": 1444,
+    "source_id_groups": 3585,
+    "source_id_rule": "source + source_job_id when the platform ID is present",
+    "winner_rule": "most complete row; earliest deterministic source row breaks ties"
+  },
+  "generated_at": "2026-08-28T04:44:57+00:00",
+  "input_files": [
+    {
+      "path": "boss/joblist_1.xlsx",
+      "rows": 2507,
+      "sha256": "dc62efaf154aa2fbd0f206a343acdac37a8c9b8b252c47e63ea773bc948d095a",
+      "source": "boss"
+    },
+    {
+      "path": "boss/joblist_2.xlsx",
+      "rows": 3585,
+      "sha256": "0455183ba818395605a10b49050a405048127b8d68e857e2cb40791861ef50f7",
+      "source": "boss"
+    },
+    {
+      "path": "qianchengwuyou/data/产品.csv",
+      "rows": 1000,
+      "sha256": "0ce665c87fcf5c26b2b61c463df2822bcb884a7d3a24fcecc7054deefbe86483",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/保险.csv",
+      "rows": 1000,
+      "sha256": "8e5a57586033c3d34c810859aefe49ba1f926861c78af13e8c2510a4493b32ac",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/基金经理.csv",
+      "rows": 1000,
+      "sha256": "9fe28cbf87cba49b74f0c26beadebbb6edaace551e41260f1ebf8d92b06c5f52",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/投行.csv",
+      "rows": 1000,
+      "sha256": "b8543b67117eb685fe1b568f63d2d30e6ecf0195f2cfc2175faaf30d2b7e6001",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/数据分析.csv",
+      "rows": 1000,
+      "sha256": "667c44286dc28f6b0460a376968d6489448c62c8d35fa1f48e8064f0ae6aba16",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/证券研究所.csv",
+      "rows": 1000,
+      "sha256": "de2acf310149eb98b10de4e8963efce47921d59ea91bce3234e71f22fdaf2df1",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/财务.csv",
+      "rows": 1000,
+      "sha256": "f54034726b1066b0f34def8d19c58bb6d272fbb8585378e14eb012cd110c991a",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/运营.csv",
+      "rows": 1000,
+      "sha256": "9ac88bc873e22ad6b584517af3a55e1b3cdabb15ca221f8da9b82ecbf55d13c3",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "qianchengwuyou/data/银行.csv",
+      "rows": 1000,
+      "sha256": "e132b7eebf747b004e1cae427e211e78eab5aad8fb3c7fd08cf2d54005615f70",
+      "source": "qianchengwuyou"
+    },
+    {
+      "path": "zlzp/上海/产品_上海.xlsx",
+      "rows": 1576,
+      "sha256": "cdc7129c03574daac2fae96be9ac6c23a5d88b9d4ab40601e52854fa51d9a10a",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/保险_上海.xlsx",
+      "rows": 542,
+      "sha256": "c1fc4da531954598e2b8457ff711d0ef0ec8220ec0fc744d419ea0611e65d9bf",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/咨询_上海.xlsx",
+      "rows": 260,
+      "sha256": "fcc69c65f08bf4668c9b5011365aa9efa9ae567089bb0085faee195e2d4fc928",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/商业分析_上海.xlsx",
+      "rows": 185,
+      "sha256": "a9983b45e6a3033957ff6596d8304d52eb804066427d6d4659a797f2b7bff596",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/基金_上海.xlsx",
+      "rows": 228,
+      "sha256": "23ce34d8a2ff93d9c416cc486d8fedcce8a639417570a151869c63be3ed1a4a0",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/投行_上海.xlsx",
+      "rows": 292,
+      "sha256": "c997668056b050db30b6d0c2d93cb6248e864e4593f0601c477e28732fef9723",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/数据分析_上海.xlsx",
+      "rows": 366,
+      "sha256": "1ce84e61baade71741cfb6646ee11d4a4664e5b0c4ea12f2ddff63da84ca0783",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/证券_上海.xlsx",
+      "rows": 581,
+      "sha256": "9644369ecbc0cebd0cd746e006dc0f7ff0f5cbd42208f75490508d32e60b8c58",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/财务_上海.xlsx",
+      "rows": 600,
+      "sha256": "ea874e2575dda66ded1556e8885e75fcea41994e4da3213935453fccbd596cdb",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/运营_上海.xlsx",
+      "rows": 596,
+      "sha256": "b138e7a215307e9c0c3e9374100f2f9a4e4cccc3d199ada6d85551ee4d72d0b2",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/量化_上海.xlsx",
+      "rows": 129,
+      "sha256": "392954f96de21da8a76a71f7ea69193a52582390013e04e14ab1567ced2f9268",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/上海/银行_上海.xlsx",
+      "rows": 823,
+      "sha256": "b229fee012310efdc8856c1463cdf890844db5e441ae2c6bd9dcdef77924b66e",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/产品_北京.xlsx",
+      "rows": 800,
+      "sha256": "1312f98c764e73407bd02b86ebff07b167118738e3f9df3720f7e0f201866174",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/保险_北京.xlsx",
+      "rows": 600,
+      "sha256": "48d19c7a81a25a4a00335b1a6a63444a225583056679b531ef415cca532ac044",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/咨询_北京.xlsx",
+      "rows": 200,
+      "sha256": "a22e20a6c110692abba7be5e500dcbfbb8896fdcf4120d5e4549e8219e6f5201",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/商业分析_北京.xlsx",
+      "rows": 80,
+      "sha256": "674d8bca785f6315a5537b6d459f7b766ba4be3e08e9abd98b81178235666d17",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/基金_北京.xlsx",
+      "rows": 306,
+      "sha256": "3fda4bed191e39207122c3602b1860346d13692d1a9fe9e40c8d5a97d20f171d",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/投行_北京.xlsx",
+      "rows": 382,
+      "sha256": "d6d154b4d87120a0794d956046caa9cb8ee6efac3c937b8b57ca2fe07bd55457",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/数据分析_北京.xlsx",
+      "rows": 640,
+      "sha256": "d7cdd9654c8145c556cb9009984ae38b10a6dff9c4311e2a82ff61f1d54b5478",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/证券_北京.xlsx",
+      "rows": 581,
+      "sha256": "f4a7055a7b12af6f25de1d50c0401ec989baa23fe7ee419f11420efc1cdb718c",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/财务_北京.xlsx",
+      "rows": 600,
+      "sha256": "7ecf6e552a972ca26eb9796149307b38831bec407963e615a4228ce37913eefd",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/运营_北京.xlsx",
+      "rows": 600,
+      "sha256": "36644fdab6a74caab6bcdecddd159bc652cd4106c007137c561e239d1776e015",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/量化_北京.xlsx",
+      "rows": 30,
+      "sha256": "a0268f6f2df70dd6cefa112e4244edd132e402db97bec881b9b3f36aa68b9513",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/北京/银行_北京.xlsx",
+      "rows": 576,
+      "sha256": "bb0ab4a70ce05ccd0dc73bce42930e3c3b55f1aefdc5580e3defc61227d6a42f",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/南京/产品_南京.xlsx",
+      "rows": 871,
+      "sha256": "e237b42efeb52ada0eddf29b347132a89deed64330c4a1f986c7bbd35fe794d4",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/南京/基金_南京.xlsx",
+      "rows": 593,
+      "sha256": "ddb4790f9dc0c372b9efe54d1468d16c7bed792e6d30594d6a0a1fcf99098e97",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/南京/财务_南京.xlsx",
+      "rows": 1000,
+      "sha256": "2e5fe45a6181591250732b4b52c382346ac2a4eb8a3b051250c285efa8616e47",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/南京/运营_南京.xlsx",
+      "rows": 920,
+      "sha256": "4d8df564f1fc2aa6f365740096e6ac0c2532677802992dc04a69323f5279d75a",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/南京/银行_南京.xlsx",
+      "rows": 973,
+      "sha256": "6432bf12781efc92ea6ee106695706ecca27a4bf654cece5644f0e0ae008510d",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/产品_广州.xlsx",
+      "rows": 600,
+      "sha256": "df77909f0b1c0fa7b67ddc4f12bee56ff14ec665ce0a6099bf52af22cf9e876f",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/保险_广州.xlsx",
+      "rows": 399,
+      "sha256": "86bcd78563e1ce64bc652f8908fb5a45bd897f979da86505276bd6795a9d512d",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/咨询_广州.xlsx",
+      "rows": 396,
+      "sha256": "72f55bab4afe21c49922b8fa0504df1ab56cfecccd02d172407cfbb552de880a",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/基金_广州.xlsx",
+      "rows": 599,
+      "sha256": "fdac30ab6a38960bcd4204d3be07cbc2db99712d567465d76c15e92eef6f670a",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/投行_广州.xlsx",
+      "rows": 194,
+      "sha256": "068f0eb510e1dbc912be1af80668482598be2d2ee1efabc098d57a123eb420e3",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/数据分析_广州.xlsx",
+      "rows": 123,
+      "sha256": "5e363baf99248c1208c5189286acd069d87449f9d54f2006b19091faf03cb475",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/证券_广州.xlsx",
+      "rows": 600,
+      "sha256": "c6d4c1e50e04cea905f60c49de4b224ff2a8e6dd469e7ff38ca153c3637c108c",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/财务_广州.xlsx",
+      "rows": 600,
+      "sha256": "f335885123871fca9173ed0e579f9e5788ce8b7f87d5454c1ff9aaca7c579faf",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/运营_广州.xlsx",
+      "rows": 600,
+      "sha256": "8a477a15e6b17a0911368f51d897a4e2d5378111fd0a542ec617f93afd496932",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/广州/银行_广州.xlsx",
+      "rows": 600,
+      "sha256": "6873c11c7c7d63ee3ce7f2571a87b8889348e38d40697f3452be994fcfc5789b",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/杭州/产品_杭州.xlsx",
+      "rows": 819,
+      "sha256": "bb3ee65015afa860f9dffc0827eb5c9c2a6a0c45f2d593e207a1ee2790620612",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/杭州/保险_杭州.xlsx",
+      "rows": 924,
+      "sha256": "8d9a00221f7768e189ef5ff8fa6af5e0d33b1ceddfe06d36d7d23eeaf688c805",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/杭州/基金_杭州.xlsx",
+      "rows": 180,
+      "sha256": "1e7ad92d639f8fdd89b40a7ec2eb5f551ccaf60771a37be03ee5fb42c01cd4fd",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/杭州/财务_杭州.xlsx",
+      "rows": 1019,
+      "sha256": "c8575bf7bc160c3bce6f068b71cc0a69cd2de2a77176cddec615e8be23d23a44",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/杭州/银行_杭州.xlsx",
+      "rows": 375,
+      "sha256": "452746d883f83efc804319669a402465da6ef08cdf54d4a218afbc2c7f5168f1",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/产品_深圳.xlsx",
+      "rows": 600,
+      "sha256": "f728828001c668f5f2b6da968626a5298d456cc10d10c5f3784c3b1a42011ccd",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/保险_深圳.xlsx",
+      "rows": 600,
+      "sha256": "fe9f962f99ed6cd0e4cd14f8780b31aec31bbb92e5129f1660e36951a04ca5a4",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/咨询_深圳.xlsx",
+      "rows": 600,
+      "sha256": "cb8e2d57f042129cf5a48a5fc178ad59c68f10a497e2545548849a7f6319d148",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/基金_深圳.xlsx",
+      "rows": 200,
+      "sha256": "b76f1146446e0b8933e32b5e177168dd356f84db8aaabd9306139270c46dea0b",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/投行_深圳.xlsx",
+      "rows": 281,
+      "sha256": "185913f10484a1e6d05e9b8297f2de120692e6b72a5df757976361a97e3ab6c5",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/数据分析_深圳.xlsx",
+      "rows": 548,
+      "sha256": "003f544f5e9b53a90f6800ea70bb6f7bd5760cfc3c050681bdaf4b84298100c7",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/证券_深圳.xlsx",
+      "rows": 600,
+      "sha256": "f591345421cf3705842d1721d7d3717c59090522662ddd76afc5ce037e8e75f2",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/财务_深圳.xlsx",
+      "rows": 600,
+      "sha256": "65e25ec65465149c447b08592985073d8969320da1b34873d9f74af19a7f3d05",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/运营_深圳.xlsx",
+      "rows": 600,
+      "sha256": "0d9b6027f971fe6da24e17f6e0392059dc05e866ca5b62d13a863ee2e1d495d7",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/量化_深圳.xlsx",
+      "rows": 50,
+      "sha256": "a42df9a2ec31ee132e38a4e3d117ad8417068e901ef6fec23591116630e4857f",
+      "source": "zlzp"
+    },
+    {
+      "path": "zlzp/深圳/银行_深圳.xlsx",
+      "rows": 600,
+      "sha256": "b00ba639a80dd11c6b7acc22931ff6c9874fa2e928842e95dfae4869cf20a39d",
+      "source": "zlzp"
+    }
+  ],
+  "missingness_unique_jobs": {
+    "city": {
+      "missing": 30,
+      "rate": 0.000823
+    },
+    "company": {
+      "missing": 0,
+      "rate": 0.0
+    },
+    "company_size": {
+      "missing": 21,
+      "rate": 0.000576
+    },
+    "description": {
+      "missing": 32582,
+      "rate": 0.893833
+    },
+    "education": {
+      "missing": 287,
+      "rate": 0.007873
+    },
+    "experience": {
+      "missing": 96,
+      "rate": 0.002634
+    },
+    "salary_mid_monthly": {
+      "missing": 2322,
+      "rate": 0.0637
+    },
+    "salary_raw": {
+      "missing": 50,
+      "rate": 0.001372
+    },
+    "title": {
+      "missing": 0,
+      "rate": 0.0
+    }
+  },
+  "reconciliation_by_source": {
+    "boss": {
+      "balanced": true,
+      "duplicate_rows_removed": 1446,
+      "raw_rows": 6092,
+      "unique_jobs": 4646
+    },
+    "qianchengwuyou": {
+      "balanced": true,
+      "duplicate_rows_removed": 1986,
+      "raw_rows": 9000,
+      "unique_jobs": 7014
+    },
+    "zlzp": {
+      "balanced": true,
+      "duplicate_rows_removed": 4445,
+      "raw_rows": 29237,
+      "unique_jobs": 24792
+    }
+  },
+  "reconciliation_pipeline": {
+    "balanced": true,
+    "duplicate_rows_removed": 7877,
+    "fallback_identity_groups": 32867,
+    "raw_rows": 44329,
+    "source_id_identity_groups": 3585,
+    "unique_jobs": 36452
+  },
+  "salary_audit": {
+    "maximum_monthly_midpoint": 450416.6666666667,
+    "minimum_monthly_midpoint": 1000.0,
+    "review_policy": "极端但周期可确定的值保留；缺少周期且可能表示年薪或非月薪的值标为 ambiguous。",
+    "success_over_200k_monthly": 3,
+    "success_under_1k_monthly": 0
+  },
+  "salary_parse_reason_raw": {
+    "annual_range": 499,
+    "implicit_period_high_wan": 81,
+    "implicit_period_low_rmb": 5,
+    "missing": 65,
+    "monthly_exact": 27,
+    "monthly_range": 40969,
+    "negotiable": 1532,
+    "one_sided_bound": 63,
+    "pay_months_out_of_range": 52,
+    "unsupported_daily": 980,
+    "unsupported_hourly": 42,
+    "unsupported_per_task": 8,
+    "unsupported_weekly": 6
+  },
+  "salary_parse_reason_unique": {
+    "annual_range": 388,
+    "implicit_period_high_wan": 73,
+    "implicit_period_low_rmb": 5,
+    "missing": 50,
+    "monthly_exact": 23,
+    "monthly_range": 33719,
+    "negotiable": 1248,
+    "one_sided_bound": 50,
+    "pay_months_out_of_range": 32,
+    "unsupported_daily": 815,
+    "unsupported_hourly": 35,
+    "unsupported_per_task": 8,
+    "unsupported_weekly": 6
+  },
+  "salary_parse_status_raw": {
+    "ambiguous": 138,
+    "missing": 65,
+    "success": 41495,
+    "unsupported": 2631
+  },
+  "salary_parse_status_unique": {
+    "ambiguous": 110,
+    "missing": 50,
+    "success": 34130,
+    "unsupported": 2162
+  },
+  "salary_policy": {
+    "ambiguous_without_period": [
+      "低于1000元且无周期标记",
+      "达到10万元且无周期标记、且无N薪佐证"
+    ],
+    "implicit_monthly_conventions": [
+      "K或千且无周期标记",
+      "不少于1000元且无周期标记",
+      "低于10万且无周期标记的万元区间"
+    ],
+    "imputation": false,
+    "success_status": "success",
+    "supported": [
+      "元/月",
+      "千/月",
+      "K/月",
+      "万/月",
+      "万/年",
+      "12-24薪"
+    ],
+    "unsupported_without_assumptions": [
+      "日薪",
+      "时薪",
+      "周薪",
+      "次薪",
+      "面议",
+      "单边区间"
+    ]
+  },
+  "scope_label": "2025年末采集样本",
+  "source_fingerprint": "c8ca0e0c923f24c27f48714387e289d49a3950bad76d27007a7c2b94da0f8b28",
+  "taxonomy": {
+    "job_category_rules": [
+      {
+        "category": "business_analysis",
+        "patterns": [
+          "商业分析",
+          "经营分析",
+          "业务分析",
+          "策略分析",
+          "战略分析",
+          "管理咨询",
+          "咨询顾问"
+        ]
+      },
+      {
+        "category": "data",
+        "patterns": [
+          "数据分析",
+          "数据科学",
+          "数据挖掘",
+          "商业智能",
+          "\\bbi\\b",
+          "算法.*(?:工程师|研究员)"
+        ]
+      },
+      {
+        "category": "product",
+        "patterns": [
+          "产品(?:经理|运营|专员|总监|负责人|助理)",
+          "产品策划"
+        ]
+      },
+      {
+        "category": "operations",
+        "patterns": [
+          "运营",
+          "用户增长",
+          "增长经理",
+          "内容策划"
+        ]
+      },
+      {
+        "category": "finance",
+        "patterns": [
+          "银行",
+          "证券",
+          "投行",
+          "投资",
+          "基金",
+          "保险",
+          "财务",
+          "会计",
+          "审计",
+          "量化",
+          "金融",
+          "风控",
+          "资产管理"
+        ]
+      }
+    ],
+    "search_category_fallbacks": {
+      "产品": "product",
+      "保险": "finance",
+      "咨询": "business_analysis",
+      "商业分析": "business_analysis",
+      "基金": "finance",
+      "基金经理": "finance",
+      "投行": "finance",
+      "数据分析": "data",
+      "证券": "finance",
+      "证券研究所": "finance",
+      "财务": "finance",
+      "运营": "operations",
+      "量化": "finance",
+      "银行": "finance"
+    },
+    "skill_rules": {
+      "data_visualization": [
+        "数据可视化",
+        "可视化分析"
+      ],
+      "excel": [
+        "\\bexcel\\b",
+        "电子表格"
+      ],
+      "financial_analysis": [
+        "财务分析",
+        "金融分析",
+        "投资分析",
+        "估值模型"
+      ],
+      "machine_learning": [
+        "机器学习",
+        "深度学习",
+        "预测模型",
+        "数据建模"
+      ],
+      "market_research": [
+        "市场调研",
+        "行业研究",
+        "商业研究",
+        "竞品分析"
+      ],
+      "operations": [
+        "运营管理",
+        "用户运营",
+        "内容运营",
+        "活动运营",
+        "经营管理"
+      ],
+      "power_bi": [
+        "\\bpower\\s*bi\\b",
+        "\\bpbi\\b"
+      ],
+      "product_management": [
+        "产品管理",
+        "产品设计",
+        "产品规划",
+        "需求分析"
+      ],
+      "project_management": [
+        "项目管理",
+        "项目计划",
+        "项目经理"
+      ],
+      "python": [
+        "\\bpython\\b"
+      ],
+      "r": [
+        "(?<![a-z])r(?![a-z])",
+        "r语言"
+      ],
+      "spss": [
+        "\\bspss\\b"
+      ],
+      "sql": [
+        "\\bsql\\b",
+        "结构化查询语言"
+      ],
+      "statistics": [
+        "统计分析",
+        "统计学",
+        "多元统计",
+        "假设检验"
+      ],
+      "tableau": [
+        "\\btableau\\b"
+      ],
+      "user_research": [
+        "用户研究",
+        "用户调研",
+        "用户访谈"
+      ]
+    }
+  },
+  "time_policy": {
+    "historical_row_observed_at": null,
+    "reason": "源文件没有可靠逐条发布时间或采集时间，不用文件时间代替。"
+  }
+}

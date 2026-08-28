@@ -484,7 +484,7 @@ def insert():
 
 
 if __name__ == '__main__':
-    client = pymongo.MongoClient('mongodb://root:abc_123456@localhost:27017')
+    client = pymongo.MongoClient(os.getenv('MONGODB_URI', 'mongodb://localhost:27017'))
     db = client.test
     collection = db.job
     if DO_DB_INSERT:

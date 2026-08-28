@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="390" viewBox="0 0 960 390" role="img">
+<title>岗位类别月薪中位数</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">岗位类别月薪中位数</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">岗位类别由固定标题词典识别</text>
+<line x1="235.00" y1="104" x2="235.00" y2="356" stroke="#cbd5e1"/>
+<text x="223" y="132" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">其他</text>
+<rect x="235.00" y="117" width="607.00" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="850.00" y="133" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥19.5k  n=881</text>
+<text x="223" y="170" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">产品</text>
+<rect x="235.00" y="155" width="466.92" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="709.92" y="171" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥15.0k  n=5,144</text>
+<text x="223" y="208" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">商业分析</text>
+<rect x="235.00" y="193" width="435.79" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="678.79" y="209" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥14.0k  n=1,472</text>
+<text x="223" y="246" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">金融财会</text>
+<rect x="235.00" y="231" width="420.23" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="663.23" y="247" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥13.5k  n=20,599</text>
+<text x="223" y="284" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">数据</text>
+<rect x="235.00" y="269" width="389.10" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="632.10" y="285" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥12.5k  n=1,936</text>
+<text x="223" y="322" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">运营</text>
+<rect x="235.00" y="307" width="332.03" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="575.03" y="323" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥10.7k  n=4,098</text>
+</svg>

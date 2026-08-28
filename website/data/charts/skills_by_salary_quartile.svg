@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="835" viewBox="0 0 1020 835" role="img">
+<title>不同薪资分组的技能提及率</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">不同薪资分组的技能提及率</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">技能范围预先固定；比较上、下四分位职位中的提及比例</text>
+<rect x="230" y="96" width="12" height="12" rx="2" fill="#94a3b8"/>
+<text x="248" y="107" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">月薪下四分位</text>
+<rect x="420" y="96" width="12" height="12" rx="2" fill="#1e40af"/>
+<text x="438" y="107" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">月薪上四分位</text>
+<line x1="230.00" y1="122" x2="230.00" y2="793" stroke="#94a3b8"/>
+<text x="218" y="148" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">财务分析</text>
+<rect x="230.00" y="134" width="514.73" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="750.73" y="145" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">3.3%</text>
+<rect x="230.00" y="152" width="675.00" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="911.00" y="163" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">4.4%</text>
+<text x="218" y="212" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">运营管理</text>
+<rect x="230.00" y="198" width="413.01" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="649.01" y="209" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">2.7%</text>
+<rect x="230.00" y="216" width="306.68" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="542.68" y="227" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">2.0%</text>
+<text x="218" y="276" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">产品管理</text>
+<rect x="230.00" y="262" width="200.34" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="436.34" y="273" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">1.3%</text>
+<rect x="230.00" y="280" width="425.34" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="661.34" y="291" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">2.8%</text>
+<text x="218" y="340" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">SQL</text>
+<rect x="230.00" y="326" width="214.21" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="450.21" y="337" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">1.4%</text>
+<rect x="230.00" y="344" width="248.12" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="484.12" y="355" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">1.6%</text>
+<text x="218" y="404" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">项目管理</text>
+<rect x="230.00" y="390" width="94.01" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="330.01" y="401" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">0.6%</text>
+<rect x="230.00" y="408" width="397.60" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="633.60" y="419" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">2.6%</text>
+<text x="218" y="468" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">Python</text>
+<rect x="230.00" y="454" width="109.42" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="345.42" y="465" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">0.7%</text>
+<rect x="230.00" y="472" width="332.88" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="568.88" y="483" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">2.2%</text>
+<text x="218" y="532" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">Excel</text>
+<rect x="230.00" y="518" width="337.50" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="573.50" y="529" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">2.2%</text>
+<rect x="230.00" y="536" width="61.64" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="297.64" y="547" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">0.4%</text>
+<text x="218" y="596" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">市场研究</text>
+<rect x="230.00" y="582" width="104.79" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="340.79" y="593" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">0.7%</text>
+<rect x="230.00" y="600" width="278.94" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="514.94" y="611" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">1.8%</text>
+<text x="218" y="660" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">统计分析</text>
+<rect x="230.00" y="646" width="183.39" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="419.39" y="657" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">1.2%</text>
+<rect x="230.00" y="664" width="78.60" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="314.60" y="675" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">0.5%</text>
+<text x="218" y="724" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">机器学习</text>
+<rect x="230.00" y="710" width="60.10" height="12" rx="2" fill="#94a3b8" opacity=".88"/>
+<text x="296.10" y="721" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">0.4%</text>
+<rect x="230.00" y="728" width="157.19" height="12" rx="2" fill="#1e40af" opacity=".88"/>
+<text x="393.19" y="739" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="10" fill="#475569">1.0%</text>
+</svg>

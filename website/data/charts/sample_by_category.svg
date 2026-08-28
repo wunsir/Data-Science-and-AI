@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="390" viewBox="0 0 960 390" role="img">
+<title>岗位类别构成</title>
+<rect width="100%" height="100%" fill="#fbfaf7"/>
+<text x="42" y="48" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#17363a">岗位类别构成</text>
+<text x="42" y="78" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" fill="#617477">按固定标题词典分类；无法识别的归为其他</text>
+<line x1="235.00" y1="108" x2="235.00" y2="352" stroke="#bcc8c7" stroke-width="1"/>
+<text x="223" y="138" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">金融财会</text>
+<rect x="235.00" y="123" width="615.00" height="22" rx="3" fill="#3c7a57" opacity="0.9"/>
+<text x="858.00" y="139" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">21,947</text>
+<text x="223" y="176" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">产品</text>
+<rect x="235.00" y="161" width="154.15" height="22" rx="3" fill="#3c7a57" opacity="0.9"/>
+<text x="397.15" y="177" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">5,501</text>
+<text x="223" y="214" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">运营</text>
+<rect x="235.00" y="199" width="125.23" height="22" rx="3" fill="#3c7a57" opacity="0.9"/>
+<text x="368.23" y="215" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">4,469</text>
+<text x="223" y="252" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">数据</text>
+<rect x="235.00" y="237" width="57.39" height="22" rx="3" fill="#3c7a57" opacity="0.9"/>
+<text x="300.39" y="253" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">2,048</text>
+<text x="223" y="290" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">商业分析</text>
+<rect x="235.00" y="275" width="44.81" height="22" rx="3" fill="#3c7a57" opacity="0.9"/>
+<text x="287.81" y="291" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">1,599</text>
+<text x="223" y="328" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">其他</text>
+<rect x="235.00" y="313" width="24.88" height="22" rx="3" fill="#3c7a57" opacity="0.9"/>
+<text x="267.88" y="329" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">888</text>
+</svg>

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="615" viewBox="0 0 980 615" role="img">
+<title>经验要求与月薪分布</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">经验要求与月薪分布</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">箱体展示组内月薪的分位数位置</text>
+<line x1="220.00" y1="108" x2="220.00" y2="567" stroke="#e2e8f0"/>
+<text x="220.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥0k</text>
+<line x1="351.00" y1="108" x2="351.00" y2="567" stroke="#e2e8f0"/>
+<text x="351.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥14k</text>
+<line x1="482.00" y1="108" x2="482.00" y2="567" stroke="#e2e8f0"/>
+<text x="482.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥28k</text>
+<line x1="613.00" y1="108" x2="613.00" y2="567" stroke="#e2e8f0"/>
+<text x="613.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥42k</text>
+<line x1="744.00" y1="108" x2="744.00" y2="567" stroke="#e2e8f0"/>
+<text x="744.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥55k</text>
+<line x1="875.00" y1="108" x2="875.00" y2="567" stroke="#e2e8f0"/>
+<text x="875.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥69k</text>
+<text x="208" y="141" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">10年以上</text>
+<line x1="314.70" y1="137" x2="835.54" y2="137" stroke="#64748b" stroke-width="2"/>
+<rect x="409.40" y="125" width="189.40" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="480.42" y1="125" x2="480.42" y2="149" stroke="#be123c" stroke-width="2.5"/>
+<text x="842.54" y="141" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=580</text>
+<text x="208" y="183" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">8年及以上</text>
+<line x1="319.91" y1="179" x2="679.88" y2="179" stroke="#64748b" stroke-width="2"/>
+<rect x="385.72" y="167" width="142.05" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="456.75" y1="167" x2="456.75" y2="191" stroke="#be123c" stroke-width="2.5"/>
+<text x="686.88" y="183" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=124</text>
+<text x="208" y="225" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">10年及以上</text>
+<line x1="314.70" y1="221" x2="875.00" y2="221" stroke="#64748b" stroke-width="2"/>
+<rect x="385.72" y="209" width="213.07" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="456.75" y1="209" x2="456.75" y2="233" stroke="#be123c" stroke-width="2.5"/>
+<text x="882.00" y="225" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=115</text>
+<text x="208" y="267" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">5-10年</text>
+<line x1="305.23" y1="263" x2="681.66" y2="263" stroke="#64748b" stroke-width="2"/>
+<rect x="366.78" y="251" width="137.31" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="423.60" y1="251" x2="423.60" y2="275" stroke="#be123c" stroke-width="2.5"/>
+<text x="688.66" y="267" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=3,715</text>
+<text x="208" y="309" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">5-7年</text>
+<line x1="295.76" y1="305" x2="669.82" y2="305" stroke="#64748b" stroke-width="2"/>
+<rect x="345.48" y="293" width="117.19" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="409.40" y1="293" x2="409.40" y2="317" stroke="#be123c" stroke-width="2.5"/>
+<text x="676.82" y="309" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=56</text>
+<text x="208" y="351" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">6年及以上</text>
+<line x1="337.19" y1="347" x2="580.05" y2="347" stroke="#64748b" stroke-width="2"/>
+<rect x="361.06" y="335" width="132.38" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="409.40" y1="335" x2="409.40" y2="359" stroke="#be123c" stroke-width="2.5"/>
+<text x="587.05" y="351" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=36</text>
+<text x="208" y="393" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">4年及以上</text>
+<line x1="320.85" y1="389" x2="544.34" y2="389" stroke="#64748b" stroke-width="2"/>
+<rect x="347.84" y="377" width="87.60" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="397.56" y1="377" x2="397.56" y2="401" stroke="#be123c" stroke-width="2.5"/>
+<text x="551.34" y="393" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=33</text>
+<text x="208" y="435" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">5年及以上</text>
+<line x1="292.21" y1="431" x2="598.80" y2="431" stroke="#64748b" stroke-width="2"/>
+<rect x="337.98" y="419" width="118.77" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="385.72" y1="419" x2="385.72" y2="443" stroke="#be123c" stroke-width="2.5"/>
+<text x="605.80" y="435" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=763</text>
+<text x="208" y="477" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">3-5年</text>
+<line x1="291.02" y1="473" x2="575.12" y2="473" stroke="#64748b" stroke-width="2"/>
+<rect x="333.64" y="461" width="99.43" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="371.52" y1="461" x2="371.52" y2="485" stroke="#be123c" stroke-width="2.5"/>
+<text x="582.12" y="477" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=6,366</text>
+<text x="208" y="519" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">在校/应届</text>
+<line x1="259.06" y1="515" x2="752.68" y2="515" stroke="#64748b" stroke-width="2"/>
+<rect x="291.02" y="503" width="230.83" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="365.01" y1="503" x2="365.01" y2="527" stroke="#be123c" stroke-width="2.5"/>
+<text x="759.68" y="519" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=86</text>
+<text x="220" y="610" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">箱体为25%—75%分位数，须线为5%—95%分位数，红线为中位数。</text>
+</svg>

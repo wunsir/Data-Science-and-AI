@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="601" viewBox="0 0 960 601" role="img">
+<title>预定义技能出现频次</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">预定义技能出现频次</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">同一职位中的同一技能只计一次</text>
+<line x1="235.00" y1="104" x2="235.00" y2="567" stroke="#cbd5e1"/>
+<text x="223" y="132" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">财务分析</text>
+<rect x="235.00" y="117" width="607.00" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="850.00" y="133" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">1,345</text>
+<text x="223" y="170" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">运营管理</text>
+<rect x="235.00" y="155" width="374.13" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="617.13" y="171" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">829</text>
+<text x="223" y="208" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">产品管理</text>
+<rect x="235.00" y="193" width="354.72" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="597.72" y="209" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">786</text>
+<text x="223" y="246" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">SQL</text>
+<rect x="235.00" y="231" width="349.31" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="592.31" y="247" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">774</text>
+<text x="223" y="284" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">项目管理</text>
+<rect x="235.00" y="269" width="277.10" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="520.10" y="285" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">614</text>
+<text x="223" y="322" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">Python</text>
+<rect x="235.00" y="307" width="267.62" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="510.62" y="323" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">593</text>
+<text x="223" y="360" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">Excel</text>
+<rect x="235.00" y="345" width="228.81" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="471.81" y="361" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">507</text>
+<text x="223" y="398" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">市场研究</text>
+<rect x="235.00" y="383" width="227.00" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="470.00" y="399" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">503</text>
+<text x="223" y="436" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">统计分析</text>
+<rect x="235.00" y="421" width="130.88" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="373.88" y="437" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">290</text>
+<text x="223" y="474" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">机器学习</text>
+<rect x="235.00" y="459" width="128.17" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="371.17" y="475" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">284</text>
+<text x="223" y="512" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">Tableau</text>
+<rect x="235.00" y="497" width="46.48" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="289.48" y="513" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">103</text>
+<text x="223" y="550" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">Power BI</text>
+<rect x="235.00" y="535" width="38.36" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="281.36" y="551" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">85</text>
+</svg>

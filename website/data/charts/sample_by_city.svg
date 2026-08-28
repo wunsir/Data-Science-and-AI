@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="611" viewBox="0 0 960 611" role="img">
+<title>主要城市样本量</title>
+<rect width="100%" height="100%" fill="#fbfaf7"/>
+<text x="42" y="48" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#17363a">主要城市样本量</text>
+<text x="42" y="78" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="14" fill="#617477">按源字段中的首个城市层级归一</text>
+<line x1="235.00" y1="108" x2="235.00" y2="573" stroke="#bcc8c7" stroke-width="1"/>
+<text x="223" y="138" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">上海</text>
+<rect x="235.00" y="123" width="615.00" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="858.00" y="139" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">6,895</text>
+<text x="223" y="176" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">北京</text>
+<rect x="235.00" y="161" width="506.63" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="749.63" y="177" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">5,680</text>
+<text x="223" y="214" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">深圳</text>
+<rect x="235.00" y="199" width="491.55" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="734.55" y="215" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">5,511</text>
+<text x="223" y="252" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">广州</text>
+<rect x="235.00" y="237" width="407.26" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="650.26" y="253" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">4,566</text>
+<text x="223" y="290" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">南京</text>
+<rect x="235.00" y="275" width="372.03" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="615.03" y="291" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">4,171</text>
+<text x="223" y="328" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">杭州</text>
+<rect x="235.00" y="313" width="307.81" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="550.81" y="329" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">3,451</text>
+<text x="223" y="366" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">武汉</text>
+<rect x="235.00" y="351" width="39.87" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="282.87" y="367" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">447</text>
+<text x="223" y="404" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">成都</text>
+<rect x="235.00" y="389" width="38.62" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="281.62" y="405" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">433</text>
+<text x="223" y="442" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">泉州</text>
+<rect x="235.00" y="427" width="23.46" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="266.46" y="443" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">263</text>
+<text x="223" y="480" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">苏州</text>
+<rect x="235.00" y="465" width="22.74" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="265.74" y="481" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">255</text>
+<text x="223" y="518" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">重庆</text>
+<rect x="235.00" y="503" width="20.69" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="263.69" y="519" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">232</text>
+<text x="223" y="556" text-anchor="end" font-family="Noto Sans SC, Microsoft YaHei, sans-serif" font-size="13" fill="#314d50">福州</text>
+<rect x="235.00" y="541" width="19.80" height="22" rx="3" fill="#8b6f47" opacity="0.9"/>
+<text x="262.80" y="557" text-anchor="start" font-family="Inter, Arial, sans-serif" font-size="12" fill="#314d50">222</text>
+</svg>

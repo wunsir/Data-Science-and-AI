@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="学历、经验、公司规模、技能字段与薪资关联分析">
+    <title>岗位与技能分析 | 招聘市场数据分析</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/story.css">
+</head>
+<body class="analysis-page" data-page="micro">
+    <div id="app" v-cloak>
+        <nav class="site-nav">
+            <div class="nav-inner">
+                <a class="nav-brand" href="./index.html">Labor Market Data Analysis</a>
+                <div class="desktop-nav" aria-label="页面导航">
+                    <a v-for="item in navigation" :key="item.page" class="nav-link"
+                       :class="{ 'is-active': isActive(item.page) }" :href="item.href">{{ item.label }}</a>
+                </div>
+                <button class="menu-button" type="button" aria-controls="mobile-menu"
+                        :aria-expanded="menuOpen" @click="menuOpen = !menuOpen">菜单 <span aria-hidden="true">↓</span></button>
+            </div>
+            <div id="mobile-menu" v-show="menuOpen" class="mobile-menu">
+                <a v-for="item in navigation" :key="'mobile-' + item.page"
+                   :class="{ 'is-active': isActive(item.page) }" :href="item.href">{{ item.label }}</a>
+            </div>
+        </nav>
+
+        <main class="academic-container">
+            <header class="page-header reveal">
+                <h1>{{ data.title }}</h1>
+                <p class="source-line">{{ data.subtitle }}</p>
+                <p class="page-lead">{{ data.lead }}</p>
+                <div class="stats-grid" aria-label="数据概况">
+                    <div v-for="stat in pageStats" :key="stat.label" class="stat-item">
+                        <span class="stat-value">{{ stat.value }}</span>
+                        <span class="stat-label">{{ stat.label }}</span>
+                    </div>
+                </div>
+            </header>
+
+            <section v-for="section in data.sections" :key="section.id" :id="section.id"
+                     class="analysis-section reveal">
+                <h2>{{ section.title }}</h2>
+                <p class="section-intro">{{ section.intro }}</p>
+                <div class="figure-grid">
+                    <figure v-for="figure in section.figures" :key="figure.id"
+                            :class="[
+                                figure.layout === 'wide' ? 'figure-wide' : '',
+                                figure.layout === 'center' ? 'figure-centered' : '',
+                                figure.kind === 'interactive' ? 'figure-interactive' : ''
+                            ]">
+                        <button v-if="figure.kind === 'image'" class="figure-button" type="button"
+                                :aria-label="'放大查看：' + figure.title" @click="openLightbox(figure, $event)">
+                            <img :src="figure.src" :alt="figure.title" loading="lazy" decoding="async">
+                        </button>
+                        <div v-else class="interactive-frame-shell">
+                            <iframe class="interactive-frame" :src="figure.src" :title="figure.title"
+                                    loading="lazy" referrerpolicy="no-referrer"></iframe>
+                        </div>
+                        <figcaption>{{ figure.caption }}</figcaption>
+                    </figure>
+                </div>
+                <p class="analysis-note"><strong>分析：</strong> {{ section.note }}</p>
+            </section>
+
+            <section class="analysis-section methods-section reveal">
+                <h2>{{ data.methods.title }}</h2>
+                <p class="section-intro">{{ data.methods.intro }}</p>
+                <details class="method-details">
+                    <summary>查看处理口径与薪资换算示例</summary>
+                    <ol class="method-list">
+                        <li v-for="step in data.methods.steps" :key="step.title">
+                            <h3>{{ step.title }}</h3>
+                            <p>{{ step.text }}</p>
+                        </li>
+                    </ol>
+                    <div class="table-scroll method-table">
+                        <table>
+                            <thead><tr><th>原始薪资</th><th>月度结果</th><th>处理方式</th></tr></thead>
+                            <tbody>
+                                <tr v-for="row in data.methods.examples" :key="row[0]">
+                                    <td v-for="cell in row" :key="cell">{{ cell }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+                <p class="method-footnote">{{ data.methods.footnote }}</p>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>© 2025 Big Data Project · ZZH, CZW, LTY, WKZ</p>
+        </footer>
+
+        <div v-if="lightboxOpen" class="lightbox-overlay" role="dialog" aria-modal="true"
+             :aria-label="activeFigure.title" @click.self="closeLightbox">
+            <button class="lightbox-close" type="button" aria-label="关闭图片" @click="closeLightbox">×</button>
+            <div class="lightbox-content">
+                <img :src="activeFigure.src" :alt="activeFigure.title">
+                <p>{{ activeFigure.caption }}</p>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="./js/story-app.js"></script>
+</body>
+</html>
+

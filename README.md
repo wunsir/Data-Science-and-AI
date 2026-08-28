@@ -1,118 +1,134 @@
-# finding_jobs
-group of czw,wyg,zzh
+# Finding Jobs：招聘数据分析与 Data Agent
 
-## topic
+面向招聘者和面试官的公网数据产品样例，展示一条可复核的完整链路：三平台原始文件 → 统一事实表 → 数据质量报告 → 描述性分析与关联模型 → 受限 Text-to-SQL Agent → 微量公开职位刷新。
 
-* Big data analysis: Job Posting Data Cleanning and Descriptive Analysis
+主题口径是**“2025 年末中国主要城市复合白领岗位样本”**，覆盖金融、产品、运营、商业分析和数据岗位。历史数据是关键词与城市构成的便利样本，不代表全国招聘市场；实时数据是少量企业公开 ATS 职位快照，不能与历史样本混算或解释为时间趋势。
 
-## work allocation
-### **I. Project Objectives**
-1. Collect public recruitment data and obtain a high-quality dataset through cleaning and processing;
-2. Explore key patterns in the data (such as job distribution, salary levels, skill requirements, etc.);
-3. Intuitively present recruitment market trends through visualization to provide references for job seekers or enterprises.
+## 当前结果
 
+- 66 个原始文件、44,329 行，经确定性去重得到 36,452 个唯一职位；其中 34,130 条薪资状态为 `success`，可按明确规则分析。
+- 统一生成 SQLite seed、质量报告、分析摘要，以及宏观 8 图、微观 21 图（21 张本地 SVG 与 8 个本地交互图）。
+- 对数月薪 OLS 控制来源、岗位、城市、学历、经验、公司规模和预定义技能，使用 HC3 稳健标准误；另生成 1%/99% 截尾敏感性结果。
+- Data Agent 自动选择 `historical`、`live` 或 `compare`，只查询临时 `jobs_scoped` 视图；回答同时返回 SQL、结果行、覆盖范围、图表描述和警告。
+- 公网刷新仅支持固定 Lever 职位板与北京/上海/深圳；不运行 BOSS、前程无忧或智联爬虫。
 
-### **II. Project Process and Task Breakdown**
+静态分析结果可直接查看 [website/data/analysis_summary.json](website/data/analysis_summary.json)，数据对账见 [website/data/quality_report.json](website/data/quality_report.json)。
 
-#### **Phase 1: Data Acquisition**
-**Core Task**: Collect structured/semi-structured data from public job websites to ensure sample size and representativeness.
+## 架构
 
-1. **Selection of Data Sources**
-   - Recommended priorities:  
-     Zhaopin, 51job (obtain public information using web crawler tools);  
-   - Alternative options: Kaggle public datasets (e.g., `Kaggle Job Posts`)  
+```text
+boss/*.xlsx ───────────────┐
+qianchengwuyou/data/*.csv ├─> deterministic pipeline ─> jobs_seed.sqlite
+zlzp/*/*.xlsx ────────────┘                │              ├─ jobs_analytics
+                                          │              ├─ provenance
+                                          │              └─ dataset_versions
+                                          ├─ quality_report.json
+                                          └─ analysis_summary.json + 21 SVG + 8 interactive
 
-2. **Determination of Collection Fields** 
-   Mandatory fields:  
-   - Basic information: Job title, company name, city location, release time, number of recruits;  
-   - Core information: Salary range (e.g., "10k-15k/month"), education requirements, work experience requirements;  
-   - Descriptive information: Job responsibilities, job qualifications (extract keywords such as "Python", "strong pressure resistance").  
+browser ─> FastAPI :7860 ─> scope router ─> JSON-schema SQL plan
+                    │                         │
+                    │                         └─ read-only jobs_scoped ─> grounded answer
+                    └─ Lever refresh ─> normalize/dedupe/upsert ─> live scope
+```
 
-3. **Data Collection Execution** 
-   - Tool selection:  
-     - Code crawling: Use `Python` + `Requests` (for dynamic pages) + `BeautifulSoup` for parsing;  
-   - Output format: Save as `CSV` or `Excel` with naming conventions such as `recruitment_data_raw_202510.csv`.  
+核心模块：
 
+- `src/finding_jobs/pipeline.py`：字段映射、薪资解析、去重、provenance 和版本表。
+- `src/finding_jobs/taxonomy.py`：与薪资结果无关的固定岗位/技能词典。
+- `src/finding_jobs/analysis.py`：同源指标、手工 OLS/HC3、敏感性结果和 SVG。
+- `src/finding_jobs/agent.py`：语义范围、结构化 SQL、只读执行与数字 grounding。
+- `src/finding_jobs/live.py`：固定公开职位板的微量刷新、缓存与快照 upsert。
+- `src/finding_jobs/app.py`：API、匿名会话、限流和静态页面托管。
 
-#### **Phase 2: Data Cleaning**
-**Core Task**: Handle missing values, outliers, format inconsistencies, etc., to form a "clean" dataset.
+## 数据规则
 
-1. **Data Loading and Preliminary Exploration**
-   - Tools: `Python` (with `Pandas` library), `Excel`;  
-   - Operations:  
-     - Check data scale and field types;  
-     - Calculate the proportion of missing values (e.g., `df.isnull().sum()`), and mark fields with severe missing values (fields with a missing rate > 50% are recommended to be deleted).  
+`jobs` 事实表保留 `job_key`、`data_scope`、来源及来源 ID、职位、公司、城市、搜索类别、实际职位分类，以及 `salary_raw`、原始人民币上下界、周期、薪数、月薪上下限与中点、解析状态和详细原因；同时保留学历、经验、公司规模、技能、描述、来源 URL 和观察时间。Agent 只能访问去除来源 ID、描述、URL 和原始 JSON 的 `jobs_analytics`；描述仅暴露是否存在的布尔标记。
 
-2. **Handling Missing Values**
-   - Strategies:  
-     - Key fields (e.g., salary): If the missing rate is < 10%, use "mode imputation";  
-     - Secondary fields (e.g., number of recruits): Mark with "unknown" or `NaN` without forced imputation;  
-     - Rows with complete missing values: Delete directly.  
+去重先使用平台 ID。无 ID 记录使用规范化的来源、职位、公司、城市和薪资指纹；只有当该指纹唯一对应一个平台 ID 组时才桥接，多 ID 歧义不合并。每个原始行都写入 provenance，并标记是否为事实表保留记录。
 
-3. **Format Standardization**
-   - Salary field: Convert "10k-15k/month" to numerical values (e.g., minimum salary 10000, maximum salary 15000, average salary 12500);  
-   - Date field: Unify formats such as "2025-10-01" and "released on October 1st" to `YYYY-MM-DD`;  
-   - Text fields: Remove special symbols (e.g., `\n`) from job responsibilities and unify case (e.g., "python" → "Python").  
+薪资不做填补：
 
-4. **Handling Outliers**
-   - Identification of anomalies:  
-     - Salary anomalies (e.g., "1k-2k/month" for a "data scientist" position): Judge based on industry common sense, mark as "outlier" or delete;  
-     - Logical contradictions (e.g., "requiring 5 years of experience" but "education requirement: junior college or below" with extremely high salary): Check individually and remove if necessary.  
+- 月薪区间按原单位换算成人民币/月；明确年薪除以 12。
+- `N薪` 按月薪区间乘以 `N/12`。
+- 日薪、时薪、周薪、次薪、面议和单边区间保留原文及 `unsupported` 状态，不进入薪资分析。
+- 缺少周期且金额可能同时表示年薪或非月薪的记录标为 `ambiguous`；本轮因此从旧口径中排除 78 条曾被静默按月解析的记录。
+- 主描述保留可解析的全部极端值；截尾仅用于回归敏感性，不替代主结果。
 
-5. **Data Integration**
-   - Add derived fields:  
-     - Salary level: Classified as "low (<8k), medium (8k-20k), high (>20k)";  
-     - Experience requirements: Convert "1-3 years" "3-5 years" to numerical ranges (e.g., 1-3 years → lower limit 1, upper limit 3);  
-   - Output: Save as `recruitment_data_cleaned.csv`.  
+历史文件没有可靠的逐条发布时间或观察时间，因此统一标注为“2025 年末采集样本”，不生成时间趋势。
 
+## 本地运行
 
-#### **Phase 3: Descriptive Analysis**
-**Core Task**: Explore data distribution, correlations, and trends through statistical methods.
+Windows PowerShell：
 
-1. **Univariate Analysis**
-   - Categorical variables (e.g., city, education requirements):  
-     - Calculate the proportion of job positions in each city and the distribution of education requirements (e.g., "bachelor's degree or above" accounts for 60%);  
-   - Numerical variables (e.g., salary, work experience):  
-     - Calculate salary mean, median, and standard deviation (to judge salary dispersion);  
-     - Analyze the distribution of work experience requirements (e.g., positions requiring "3-5 years of experience" account for the highest proportion).  
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 
-2. **Bivariate/Multivariate Analysis**
-   - City and salary: Compare average salaries in different cities (e.g., salaries of big data positions in Beijing vs. Shanghai);  
-   - Education and experience: Whether high-education positions correspond to lower experience requirements (e.g., the proportion of "less than 1 year of experience" in "master's degree" positions);  
-   - Job type and skills: For example, the frequency of "Python", "SQL", and "Excel" in "data analyst" positions.  
+# 重建 seed、质量报告、分析摘要和 SVG
+.\.venv\Scripts\python.exe scripts\rebuild.py --output-dir artifacts
 
-3. **Time Trend Analysis**
-   - Count changes in the number of positions by release time (e.g., growth trend of "AI engineer" positions in the past 3 months);  
-   - Analyze salary fluctuations over time (e.g., salary differences between peak and off-seasons).  
+# 可选：启用真实 Data Agent
+$env:DASHSCOPE_API_KEY = "在本机环境变量中设置，不要写入仓库"
+$env:LLM_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+$env:LLM_MODEL = "qwen-plus"
 
+.\.venv\Scripts\python.exe -m uvicorn finding_jobs.app:app --host 127.0.0.1 --port 7860
+```
 
-#### **Phase 4: Visualization Presentation**
-**Core Task**: Intuitively display analysis results with charts to highlight key conclusions.
+打开 `http://127.0.0.1:7860`。未配置模型密钥时，研究页和预设静态结果仍可查看，但自由提问会明确返回模型不可用，不会降级为伪 Agent。
 
-1. **Tool Selection**  
-   - Entry-level: `Excel` charts, `Tableau`;  
-   - Advanced: `Python` libraries (`Matplotlib` for static charts, `Plotly` for interactive charts).  
+环境变量模板见 [.env.example](.env.example)。主要变量：
 
-2. **Essential Visualization Charts**  
-   - Geographic distribution of positions: **Bar charts/maps** (showing the number of positions in each city);  
-   - Salary distribution: **Box plots** (showing salary ranges and medians for different positions);  
-   - Proportion of education requirements: **Pie charts/donut charts**;  
-   - Skill requirement popularity: **Word clouds** (extracting high-frequency skills from "job qualifications");  
-   - Relationship between experience and salary: **Scatter plots** (x-axis: experience, y-axis: average salary).  
+| 变量 | 默认值 | 用途 |
+| --- | --- | --- |
+| `DASHSCOPE_API_KEY` | 无 | DashScope 密钥 |
+| `LLM_BASE_URL` | 北京地域 OpenAI 兼容端点 | 模型端点 |
+| `LLM_MODEL` | `qwen-plus` | 规划与回答模型 |
+| `JOBS_DB_PATH` | `artifacts/jobs_seed.sqlite` | 运行数据库 |
+| `AGENT_QUESTIONS_PER_HOUR` | `10` | 单匿名会话提问额度 |
+| `LIVE_REFRESHES_PER_HOUR` | `3` | 单匿名会话刷新额度 |
+| `MAX_DAILY_AGENT_QUESTIONS` | `100` | 单实例每日问题额度 |
 
-3. **Report Integration**  
-   - Arrange charts in the logical order of "geography → salary → skills → trends" and add conclusion explanations (e.g., "The average salary of data positions in first-tier cities is 40% higher than that in second and third-tier cities, and Python is the core skill");  
-   - Output format: PDF report.  
+## API 与安全边界
 
+- `GET /api/health`：数据库、模型和历史/实时记录状态。
+- `GET /api/meta`：口径、白名单、配额和预设问题。
+- `POST /api/ask`：`{"question":"...", "scope_override":"historical|live|compare"}`。
+- `POST /api/live/refresh`：`{"board":"xsolla|coins|ppro|dlocal", "city":"北京|上海|深圳"}`。
 
-### **III. Tools and Technology Stack**
-- Data acquisition: `Python` (with `Requests`);  
-- Data cleaning: `Python` (with `Pandas`/`NumPy`), `Excel`;  
-- Analysis and visualization: `Python` (with `Matplotlib`/`Plotly`), `Tableau`;  
-- Version control: `Git` (optional, for code/data version management).  
+SQL 必须是单条 `SELECT`，最多两条 compare 查询、每条最多返回 200 行；静态检查、SQLite authorizer、函数白名单、只读连接和执行超时共同限制访问。模型回答中的阿拉伯数字若不能在结果行中定位，整个回答会被拒绝。
 
+实时刷新使用 Lever 公开 Postings API。相同公司/城市组合缓存 10 分钟，每次最多规范化 50 条；上游失败时只返回明确错误或最后缓存。运行数据库位于容器临时目录，重启后实时记录清空。
 
-### **IV. Expected Outcomes**
-1. A cleaned recruitment dataset;  
-2. A descriptive analysis report containing key findings;  
-3. Several core visualization charts supporting interactive or static display.
+## 测试与评估
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+测试覆盖字段映射、薪资单位、固定词典、ID/指纹去重、provenance、逐层对账、OLS/HC3、SVG、SQL 攻击、范围路由、数字 grounding、模型缺失、空结果、缓存、upsert、白名单和限流。
+
+18 题真实模型评估入口：
+
+```powershell
+.\.venv\Scripts\python.exe scripts\evaluate_agent.py
+```
+
+题集由 8 个历史、5 个最新、3 个分组比较和 2 个不支持问题组成。脚本需要真实 `DASHSCOPE_API_KEY`，无密钥时退出且不生成虚假得分；目标为支持问题 SQL 成功率至少 90%，不支持问题全部拒绝。
+
+## Docker 与公网模式
+
+```powershell
+docker build -t finding-jobs-agent .
+docker run --rm -p 7860:7860 -e DASHSCOPE_API_KEY finding-jobs-agent
+```
+
+镜像构建阶段重建历史 seed 与静态分析产物；启动时将 seed 复制到 `/tmp/finding_jobs/jobs.sqlite`，服务监听 `0.0.0.0:7860`。`ms_deploy.json` 固定 ModelScope Docker Studio 端口 7860。仓库没有自动创建、更新或发布公开 Studio；发布前需再次确认，并在平台密钥设置中配置凭证。
+
+`website/` 也可继续发布到 GitHub Pages。若 `/api/health` 不可用，页面自动进入静态模式并禁用提问与刷新按钮，不展示无响应交互。
+
+## 凭证与历史说明
+
+当前工作树已移除旧 Cookie、内嵌 API key 和硬编码 MongoDB 认证，并将本地凭证文件加入忽略规则。此次没有重写 Git 历史；任何曾提交且仍可能有效的 Cookie、API key 或数据库凭证都必须在公网部署前失效或轮换。
+
+公开实时接口选择 Lever 官方职位发布接口；旧 BOSS/前程无忧/智联脚本仅保留为历史采集与清洗参考，不由访客触发。相关边界可参阅 [Lever Postings API](https://github.com/lever/postings-api)、[智联用户服务协议](https://rd6.zhaopin.com/aboutus/legal/service) 和 [ModelScope Docker Studio](https://www.modelscope.cn/docs/studios/docker)。

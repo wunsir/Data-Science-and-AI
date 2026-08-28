@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="390" viewBox="0 0 960 390" role="img">
+<title>不同技能数量区间的月薪中位数</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">不同技能数量区间的月薪中位数</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">这里只比较岗位描述中的技能提及数量</text>
+<line x1="235.00" y1="104" x2="235.00" y2="356" stroke="#cbd5e1"/>
+<text x="223" y="132" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">0项</text>
+<rect x="235.00" y="117" width="539.56" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="782.56" y="133" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥13.0k  n=28,939</text>
+<text x="223" y="170" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">1项</text>
+<rect x="235.00" y="155" width="581.06" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="824.06" y="171" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥14.0k  n=4,141</text>
+<text x="223" y="208" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">2项</text>
+<rect x="235.00" y="193" width="607.00" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="850.00" y="209" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥14.6k  n=681</text>
+<text x="223" y="246" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">3项</text>
+<rect x="235.00" y="231" width="518.80" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="761.80" y="247" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥12.5k  n=287</text>
+<text x="223" y="284" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">4项及以上</text>
+<rect x="235.00" y="269" width="518.80" height="22" rx="3" fill="#0f766e" opacity=".9"/>
+<text x="761.80" y="285" text-anchor="start" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#334155">¥12.5k  n=82</text>
+</svg>

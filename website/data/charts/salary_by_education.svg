@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="615" viewBox="0 0 980 615" role="img">
+<title>学历要求与月薪分布</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">学历要求与月薪分布</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">箱体展示组内月薪的分位数位置</text>
+<line x1="220.00" y1="108" x2="220.00" y2="567" stroke="#e2e8f0"/>
+<text x="220.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥0k</text>
+<line x1="351.00" y1="108" x2="351.00" y2="567" stroke="#e2e8f0"/>
+<text x="351.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥10k</text>
+<line x1="482.00" y1="108" x2="482.00" y2="567" stroke="#e2e8f0"/>
+<text x="482.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥19k</text>
+<line x1="613.00" y1="108" x2="613.00" y2="567" stroke="#e2e8f0"/>
+<text x="613.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥28k</text>
+<line x1="744.00" y1="108" x2="744.00" y2="567" stroke="#e2e8f0"/>
+<text x="744.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥38k</text>
+<line x1="875.00" y1="108" x2="875.00" y2="567" stroke="#e2e8f0"/>
+<text x="875.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥48k</text>
+<text x="208" y="141" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">博士</text>
+<line x1="426.84" y1="137" x2="875.00" y2="137" stroke="#64748b" stroke-width="2"/>
+<rect x="514.18" y="125" width="171.22" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="633.68" y1="125" x2="633.68" y2="149" stroke="#be123c" stroke-width="2.5"/>
+<text x="882.00" y="141" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=56</text>
+<text x="208" y="183" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">硕士</text>
+<line x1="354.45" y1="179" x2="823.29" y2="179" stroke="#64748b" stroke-width="2"/>
+<rect x="413.05" y="167" width="151.68" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="495.79" y1="167" x2="495.79" y2="191" stroke="#be123c" stroke-width="2.5"/>
+<text x="830.29" y="183" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=1,971</text>
+<text x="208" y="225" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">本科</text>
+<line x1="309.63" y1="221" x2="771.58" y2="221" stroke="#64748b" stroke-width="2"/>
+<rect x="364.79" y="209" width="165.47" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="426.84" y1="209" x2="426.84" y2="233" stroke="#be123c" stroke-width="2.5"/>
+<text x="778.58" y="225" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=18,000</text>
+<text x="208" y="267" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">大专</text>
+<line x1="292.39" y1="263" x2="599.21" y2="263" stroke="#64748b" stroke-width="2"/>
+<rect x="326.87" y="251" width="117.21" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="378.58" y1="251" x2="378.58" y2="275" stroke="#be123c" stroke-width="2.5"/>
+<text x="606.21" y="267" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=10,460</text>
+<text x="208" y="309" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">学历不限</text>
+<line x1="282.05" y1="305" x2="633.68" y2="305" stroke="#64748b" stroke-width="2"/>
+<rect x="323.42" y="293" width="103.42" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="357.89" y1="293" x2="357.89" y2="317" stroke="#be123c" stroke-width="2.5"/>
+<text x="640.68" y="309" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=1,917</text>
+<text x="208" y="351" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">高中</text>
+<line x1="282.05" y1="347" x2="564.74" y2="347" stroke="#64748b" stroke-width="2"/>
+<rect x="316.53" y="335" width="112.61" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="357.89" y1="335" x2="357.89" y2="359" stroke="#be123c" stroke-width="2.5"/>
+<text x="571.74" y="351" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=711</text>
+<text x="208" y="393" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">中专/中技</text>
+<line x1="284.12" y1="389" x2="593.69" y2="389" stroke="#64748b" stroke-width="2"/>
+<rect x="316.53" y="377" width="110.32" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="357.89" y1="377" x2="357.89" y2="401" stroke="#be123c" stroke-width="2.5"/>
+<text x="600.69" y="393" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=509</text>
+<text x="208" y="435" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">未知</text>
+<line x1="285.40" y1="431" x2="578.53" y2="431" stroke="#64748b" stroke-width="2"/>
+<rect x="316.53" y="419" width="75.84" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="349.97" y1="419" x2="349.97" y2="443" stroke="#be123c" stroke-width="2.5"/>
+<text x="585.53" y="435" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=258</text>
+<text x="208" y="477" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">初中及以下</text>
+<line x1="268.67" y1="473" x2="583.35" y2="473" stroke="#64748b" stroke-width="2"/>
+<rect x="313.08" y="461" width="172.37" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="337.21" y1="461" x2="337.21" y2="485" stroke="#be123c" stroke-width="2.5"/>
+<text x="590.35" y="477" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=83</text>
+<text x="208" y="519" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">中技/中专</text>
+<line x1="276.40" y1="515" x2="397.88" y2="515" stroke="#64748b" stroke-width="2"/>
+<rect x="302.74" y="503" width="48.26" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="323.42" y1="503" x2="323.42" y2="527" stroke="#be123c" stroke-width="2.5"/>
+<text x="404.88" y="519" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=165</text>
+<text x="220" y="610" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">箱体为25%—75%分位数，须线为5%—95%分位数，红线为中位数。</text>
+</svg>

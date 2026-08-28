@@ -6,6 +6,8 @@ ENV/
 
 # Python
 __pycache__/
+.pytest_cache/
+.playwright-cli/
 *.py[cod]
 *$py.class
 *.so
@@ -48,3 +50,16 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Local credentials and crawler session state
+.env
+.env.*
+!.env.example
+cookie.txt
+**/cookie.txt
+
+# Generated application artifacts
+artifacts/
+website/data/generated/
+*.sqlite
+*.sqlite3

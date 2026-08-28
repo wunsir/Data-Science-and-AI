@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="588" viewBox="0 0 1020 588" role="img">
+<title>主要城市学历要求构成</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">主要城市学历要求构成</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">每根柱表示该城市职位样本中的学历要求比例</text>
+<rect x="180" y="91" width="12" height="12" rx="2" fill="#1e40af"/>
+<text x="198" y="101" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">本科</text>
+<rect x="360" y="91" width="12" height="12" rx="2" fill="#0f766e"/>
+<text x="378" y="101" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">大专</text>
+<rect x="540" y="91" width="12" height="12" rx="2" fill="#7c3aed"/>
+<text x="558" y="101" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">硕士</text>
+<rect x="720" y="91" width="12" height="12" rx="2" fill="#b45309"/>
+<text x="738" y="101" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">学历不限</text>
+<rect x="180" y="118" width="12" height="12" rx="2" fill="#be123c"/>
+<text x="198" y="128" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">高中</text>
+<rect x="360" y="118" width="12" height="12" rx="2" fill="#475569"/>
+<text x="378" y="128" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">其他</text>
+<text x="168" y="168" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">上海</text>
+<rect x="180.00" y="150" width="439.55" height="25" fill="#1e40af"/>
+<text x="399.78" y="167" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">57%</text>
+<rect x="619.55" y="150" width="201.69" height="25" fill="#0f766e"/>
+<text x="720.40" y="167" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">26%</text>
+<rect x="821.24" y="150" width="72.59" height="25" fill="#7c3aed"/>
+<text x="857.53" y="167" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">9%</text>
+<rect x="893.83" y="150" width="32.27" height="25" fill="#b45309"/>
+<rect x="926.10" y="150" width="10.27" height="25" fill="#be123c"/>
+<rect x="936.38" y="150" width="13.62" height="25" fill="#475569"/>
+<text x="168" y="214" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">北京</text>
+<rect x="180.00" y="196" width="471.35" height="25" fill="#1e40af"/>
+<text x="415.68" y="213" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">61%</text>
+<rect x="651.35" y="196" width="175.69" height="25" fill="#0f766e"/>
+<text x="739.20" y="213" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">23%</text>
+<rect x="827.04" y="196" width="76.46" height="25" fill="#7c3aed"/>
+<text x="865.27" y="213" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">10%</text>
+<rect x="903.50" y="196" width="29.96" height="25" fill="#b45309"/>
+<rect x="933.46" y="196" width="6.91" height="25" fill="#be123c"/>
+<rect x="940.38" y="196" width="9.62" height="25" fill="#475569"/>
+<text x="168" y="260" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">深圳</text>
+<rect x="180.00" y="242" width="400.02" height="25" fill="#1e40af"/>
+<text x="380.01" y="259" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">52%</text>
+<rect x="580.02" y="242" width="244.93" height="25" fill="#0f766e"/>
+<text x="702.49" y="259" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">32%</text>
+<rect x="824.95" y="242" width="47.23" height="25" fill="#7c3aed"/>
+<text x="848.56" y="259" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">6%</text>
+<rect x="872.18" y="242" width="45.97" height="25" fill="#b45309"/>
+<text x="895.16" y="259" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">6%</text>
+<rect x="918.14" y="242" width="12.99" height="25" fill="#be123c"/>
+<rect x="931.14" y="242" width="18.86" height="25" fill="#475569"/>
+<text x="168" y="306" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">广州</text>
+<rect x="180.00" y="288" width="356.84" height="25" fill="#1e40af"/>
+<text x="358.42" y="305" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">46%</text>
+<rect x="536.84" y="288" width="300.18" height="25" fill="#0f766e"/>
+<text x="686.93" y="305" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">39%</text>
+<rect x="837.01" y="288" width="26.31" height="25" fill="#7c3aed"/>
+<rect x="863.32" y="288" width="48.74" height="25" fill="#b45309"/>
+<text x="887.69" y="305" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">6%</text>
+<rect x="912.06" y="288" width="13.83" height="25" fill="#be123c"/>
+<rect x="925.88" y="288" width="24.12" height="25" fill="#475569"/>
+<text x="168" y="352" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">南京</text>
+<rect x="180.00" y="334" width="419.24" height="25" fill="#1e40af"/>
+<text x="389.62" y="351" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">54%</text>
+<rect x="599.24" y="334" width="244.05" height="25" fill="#0f766e"/>
+<text x="721.27" y="351" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">32%</text>
+<rect x="843.30" y="334" width="35.26" height="25" fill="#7c3aed"/>
+<rect x="878.56" y="334" width="49.84" height="25" fill="#b45309"/>
+<text x="903.48" y="351" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">6%</text>
+<rect x="928.40" y="334" width="7.38" height="25" fill="#be123c"/>
+<rect x="935.79" y="334" width="14.21" height="25" fill="#475569"/>
+<text x="168" y="398" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">杭州</text>
+<rect x="180.00" y="380" width="421.03" height="25" fill="#1e40af"/>
+<text x="390.52" y="397" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">55%</text>
+<rect x="601.03" y="380" width="270.20" height="25" fill="#0f766e"/>
+<text x="736.14" y="397" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">35%</text>
+<rect x="871.24" y="380" width="21.64" height="25" fill="#7c3aed"/>
+<rect x="892.88" y="380" width="35.25" height="25" fill="#b45309"/>
+<rect x="928.13" y="380" width="9.15" height="25" fill="#be123c"/>
+<rect x="937.28" y="380" width="12.72" height="25" fill="#475569"/>
+<text x="168" y="444" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">武汉</text>
+<rect x="180.00" y="426" width="416.87" height="25" fill="#1e40af"/>
+<text x="388.43" y="443" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">54%</text>
+<rect x="596.87" y="426" width="223.94" height="25" fill="#0f766e"/>
+<text x="708.84" y="443" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">29%</text>
+<rect x="820.81" y="426" width="20.67" height="25" fill="#7c3aed"/>
+<rect x="841.48" y="426" width="18.95" height="25" fill="#b45309"/>
+<rect x="860.43" y="426" width="34.45" height="25" fill="#be123c"/>
+<rect x="894.88" y="426" width="55.12" height="25" fill="#475569"/>
+<text x="922.44" y="443" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">7%</text>
+<text x="168" y="490" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">成都</text>
+<rect x="180.00" y="472" width="343.21" height="25" fill="#1e40af"/>
+<text x="351.61" y="489" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">45%</text>
+<rect x="523.21" y="472" width="245.40" height="25" fill="#0f766e"/>
+<text x="645.91" y="489" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">32%</text>
+<rect x="768.61" y="472" width="24.90" height="25" fill="#7c3aed"/>
+<rect x="793.51" y="472" width="16.00" height="25" fill="#b45309"/>
+<rect x="809.52" y="472" width="49.79" height="25" fill="#be123c"/>
+<text x="834.41" y="489" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">6%</text>
+<rect x="859.31" y="472" width="90.69" height="25" fill="#475569"/>
+<text x="904.65" y="489" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">12%</text>
+</svg>

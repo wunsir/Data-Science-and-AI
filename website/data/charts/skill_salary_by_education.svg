@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="475" viewBox="0 0 1080 475" role="img">
+<title>不同学历组中的技能—薪资差异</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">不同学历组中的技能—薪资差异</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">组内比较技能提及与未提及岗位的月薪中位数</text>
+<text x="259.58" y="137" transform="rotate(-28 259.58 137)" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">财务分析</text>
+<text x="398.75" y="137" transform="rotate(-28 398.75 137)" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">运营管理</text>
+<text x="537.92" y="137" transform="rotate(-28 537.92 137)" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">产品管理</text>
+<text x="677.08" y="137" transform="rotate(-28 677.08 137)" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">SQL</text>
+<text x="816.25" y="137" transform="rotate(-28 816.25 137)" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">项目管理</text>
+<text x="955.42" y="137" transform="rotate(-28 955.42 137)" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#475569">Python</text>
+<text x="178" y="185" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">本科</text>
+<rect x="191.00" y="156.00" width="137.17" height="48.00" rx="3" fill="#6d85cd"/>
+<text x="259.58" y="185" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">+6.7%</text>
+<rect x="330.17" y="156.00" width="137.17" height="48.00" rx="3" fill="#b0bfe7"/>
+<text x="398.75" y="185" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-6.7%</text>
+<rect x="469.33" y="156.00" width="137.17" height="48.00" rx="3" fill="#3b59ba"/>
+<text x="537.92" y="185" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">+16.7%</text>
+<rect x="608.50" y="156.00" width="137.17" height="48.00" rx="3" fill="#b0bfe7"/>
+<text x="677.08" y="185" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-6.7%</text>
+<rect x="747.67" y="156.00" width="137.17" height="48.00" rx="3" fill="#3b59ba"/>
+<text x="816.25" y="185" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">+16.7%</text>
+<rect x="886.83" y="156.00" width="137.17" height="48.00" rx="3" fill="#657dca"/>
+<text x="955.42" y="185" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">+8.3%</text>
+<text x="178" y="235" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">大专</text>
+<rect x="191.00" y="206.00" width="137.17" height="48.00" rx="3" fill="#e5edfb"/>
+<text x="259.58" y="235" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-17.4%</text>
+<rect x="330.17" y="206.00" width="137.17" height="48.00" rx="3" fill="#eff6ff"/>
+<text x="398.75" y="235" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-19.4%</text>
+<rect x="469.33" y="206.00" width="137.17" height="48.00" rx="3" fill="#637cc9"/>
+<text x="537.92" y="235" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">+8.7%</text>
+<rect x="608.50" y="206.00" width="137.17" height="48.00" rx="3" fill="#e5edfb"/>
+<text x="677.08" y="235" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-17.4%</text>
+<rect x="747.67" y="206.00" width="137.17" height="48.00" rx="3" fill="#1e40af"/>
+<text x="816.25" y="235" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#ffffff">+22.5%</text>
+<rect x="886.83" y="206.00" width="137.17" height="48.00" rx="3" fill="#cfdaf3"/>
+<text x="955.42" y="235" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-13.0%</text>
+<text x="178" y="285" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">硕士</text>
+<rect x="191.00" y="256.00" width="137.17" height="48.00" rx="3" fill="#bac8eb"/>
+<text x="259.58" y="285" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-8.8%</text>
+<rect x="330.17" y="256.00" width="137.17" height="48.00" rx="3" fill="#c6d3ef"/>
+<text x="398.75" y="285" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-11.2%</text>
+<rect x="469.33" y="256.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="537.92" y="285" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="608.50" y="256.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="677.08" y="285" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="747.67" y="256.00" width="137.17" height="48.00" rx="3" fill="#8ea2da"/>
+<text x="816.25" y="285" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">+0.0%</text>
+<rect x="886.83" y="256.00" width="137.17" height="48.00" rx="3" fill="#8ea2da"/>
+<text x="955.42" y="285" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">+0.0%</text>
+<text x="178" y="335" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">学历不限</text>
+<rect x="191.00" y="306.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="259.58" y="335" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="330.17" y="306.00" width="137.17" height="48.00" rx="3" fill="#90a4db"/>
+<text x="398.75" y="335" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#1e293b">-0.4%</text>
+<rect x="469.33" y="306.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="537.92" y="335" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="608.50" y="306.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="677.08" y="335" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="747.67" y="306.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="816.25" y="335" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="886.83" y="306.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="955.42" y="335" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<text x="178" y="385" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">高中</text>
+<rect x="191.00" y="356.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="259.58" y="385" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="330.17" y="356.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="398.75" y="385" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="469.33" y="356.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="537.92" y="385" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="608.50" y="356.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="677.08" y="385" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="747.67" y="356.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="816.25" y="385" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<rect x="886.83" y="356.00" width="137.17" height="48.00" rx="3" fill="#f1f5f9"/>
+<text x="955.42" y="385" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#94a3b8">—</text>
+<text x="190" y="447" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="12" fill="#64748b">浅色表示较低，深色表示较高；“—”为样本量不足。</text>
+</svg>

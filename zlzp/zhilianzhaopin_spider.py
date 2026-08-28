@@ -94,7 +94,7 @@ def get_target_info_selenium(driver, results):
 def write2file(current_page, results, fileType, savePath):
     """将解析的数据写入指定文件类型"""
     # 创建保存目录
-    save_dir = r'C:\Users\czwxr\Desktop\DSAI\zhaopin_data'
+    save_dir = os.path.join(savePath, "zhaopin_data")
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 

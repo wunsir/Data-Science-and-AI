@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="615" viewBox="0 0 980 615" role="img">
+<title>公司规模与月薪分布</title>
+<rect width="100%" height="100%" fill="#ffffff"/>
+<text x="42" y="48" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="700" fill="#0f172a">公司规模与月薪分布</text>
+<text x="42" y="78" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="14" fill="#64748b">箱体展示组内月薪的分位数位置</text>
+<line x1="220.00" y1="108" x2="220.00" y2="567" stroke="#e2e8f0"/>
+<text x="220.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥0k</text>
+<line x1="351.00" y1="108" x2="351.00" y2="567" stroke="#e2e8f0"/>
+<text x="351.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥11k</text>
+<line x1="482.00" y1="108" x2="482.00" y2="567" stroke="#e2e8f0"/>
+<text x="482.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥22k</text>
+<line x1="613.00" y1="108" x2="613.00" y2="567" stroke="#e2e8f0"/>
+<text x="613.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥33k</text>
+<line x1="744.00" y1="108" x2="744.00" y2="567" stroke="#e2e8f0"/>
+<text x="744.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥44k</text>
+<line x1="875.00" y1="108" x2="875.00" y2="567" stroke="#e2e8f0"/>
+<text x="875.00" y="590" text-anchor="middle" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">¥55k</text>
+<text x="208" y="141" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">100-499人</text>
+<line x1="279.55" y1="137" x2="875.00" y2="137" stroke="#64748b" stroke-width="2"/>
+<rect x="333.14" y="125" width="220.32" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="458.18" y1="125" x2="458.18" y2="149" stroke="#be123c" stroke-width="2.5"/>
+<text x="882.00" y="141" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=950</text>
+<text x="208" y="183" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">1000-9999人</text>
+<line x1="303.36" y1="179" x2="666.59" y2="179" stroke="#64748b" stroke-width="2"/>
+<rect x="355.47" y="167" width="120.58" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="398.64" y1="167" x2="398.64" y2="191" stroke="#be123c" stroke-width="2.5"/>
+<text x="673.59" y="183" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=6,566</text>
+<text x="208" y="225" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">10000人以上</text>
+<line x1="291.45" y1="221" x2="696.36" y2="221" stroke="#64748b" stroke-width="2"/>
+<rect x="345.05" y="209" width="142.91" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="398.64" y1="209" x2="398.64" y2="233" stroke="#be123c" stroke-width="2.5"/>
+<text x="703.36" y="225" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=4,950</text>
+<text x="208" y="267" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">500-999人</text>
+<line x1="291.45" y1="263" x2="636.82" y2="263" stroke="#64748b" stroke-width="2"/>
+<rect x="345.05" y="251" width="142.91" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="398.64" y1="251" x2="398.64" y2="275" stroke="#be123c" stroke-width="2.5"/>
+<text x="643.82" y="267" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=2,551</text>
+<text x="208" y="309" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">300-499人</text>
+<line x1="291.45" y1="305" x2="639.30" y2="305" stroke="#64748b" stroke-width="2"/>
+<rect x="333.14" y="293" width="148.86" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="398.64" y1="293" x2="398.64" y2="317" stroke="#be123c" stroke-width="2.5"/>
+<text x="646.30" y="309" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=981</text>
+<text x="208" y="351" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">5000-10000人</text>
+<line x1="285.50" y1="347" x2="587.69" y2="347" stroke="#64748b" stroke-width="2"/>
+<rect x="327.18" y="335" width="131.00" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="381.27" y1="335" x2="381.27" y2="359" stroke="#be123c" stroke-width="2.5"/>
+<text x="594.69" y="351" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=347</text>
+<text x="208" y="393" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">100-299人</text>
+<line x1="291.45" y1="389" x2="577.27" y2="389" stroke="#64748b" stroke-width="2"/>
+<rect x="327.18" y="377" width="119.09" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="368.86" y1="377" x2="368.86" y2="401" stroke="#be123c" stroke-width="2.5"/>
+<text x="584.27" y="393" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=4,045</text>
+<text x="208" y="435" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">1000-5000人</text>
+<line x1="279.55" y1="431" x2="577.27" y2="431" stroke="#64748b" stroke-width="2"/>
+<rect x="327.18" y="419" width="131.00" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="368.86" y1="419" x2="368.86" y2="443" stroke="#be123c" stroke-width="2.5"/>
+<text x="584.27" y="435" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=1,416</text>
+<text x="208" y="477" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">0-20人</text>
+<line x1="273.59" y1="473" x2="815.45" y2="473" stroke="#64748b" stroke-width="2"/>
+<rect x="309.32" y="461" width="178.64" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="368.86" y1="461" x2="368.86" y2="485" stroke="#be123c" stroke-width="2.5"/>
+<text x="822.45" y="477" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=674</text>
+<text x="208" y="519" text-anchor="end" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="13" fill="#334155">500-1000人</text>
+<line x1="288.48" y1="515" x2="636.82" y2="515" stroke="#64748b" stroke-width="2"/>
+<rect x="327.18" y="503" width="119.09" height="24" rx="3" fill="#dbeafe" stroke="#1e40af" stroke-width="1.5"/>
+<line x1="368.86" y1="503" x2="368.86" y2="527" stroke="#be123c" stroke-width="2.5"/>
+<text x="643.82" y="519" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">n=646</text>
+<text x="220" y="610" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="11" fill="#64748b">箱体为25%—75%分位数，须线为5%—95%分位数，红线为中位数。</text>
+</svg>

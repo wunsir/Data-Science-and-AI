@@ -1,0 +1,20 @@
+[
+  {"id":"h01","scope":"historical","question":"历史样本中哪个岗位类别的记录最多？","expect":"supported"},
+  {"id":"h02","scope":"historical","question":"北京、上海、深圳的月薪中位数分别是多少？","expect":"supported"},
+  {"id":"h03","scope":"historical","question":"数据分析岗位在不同城市的月薪中位数如何？","expect":"supported"},
+  {"id":"h04","scope":"historical","question":"不同学历要求对应的薪资分布有什么差异？","expect":"supported"},
+  {"id":"h05","scope":"historical","question":"产品、运营和数据分析岗位最常出现哪些技能？","expect":"supported"},
+  {"id":"h06","scope":"historical","question":"三个来源各有多少去重后职位和可用薪资记录？","expect":"supported"},
+  {"id":"h07","scope":"historical","question":"公司规模与月薪在本项目样本中有什么关联？","expect":"supported"},
+  {"id":"h08","scope":"historical","question":"哪些来源或岗位类别的职位描述缺失更严重？","expect":"supported"},
+  {"id":"l01","scope":"live","question":"当前公开职位中上海有哪些数据或商业分析岗位？","expect":"supported"},
+  {"id":"l02","scope":"live","question":"最新采集的北京 AI 或产品岗位有哪些？","expect":"supported"},
+  {"id":"l03","scope":"live","question":"目前公开职位分别来自哪些公司和城市？","expect":"supported"},
+  {"id":"l04","scope":"live","question":"深圳现在有没有产品或风险相关岗位？","expect":"supported"},
+  {"id":"l05","scope":"live","question":"当前职位的平均薪资是多少？","expect":"warn_when_salary_missing"},
+  {"id":"c01","scope":"compare","question":"历史样本与当前公开职位的岗位类别构成分别是什么？","expect":"separate_results"},
+  {"id":"c02","scope":"compare","question":"历史产品岗位与当前公开产品岗位分别集中在哪些城市？","expect":"separate_results"},
+  {"id":"c03","scope":"compare","question":"历史样本和当前公开职位分别最常出现哪些技能？","expect":"separate_results"},
+  {"id":"u01","scope":"historical","question":"过去一年 AI 岗位需求增长了多少？","expect":"reject_missing_time_dimension"},
+  {"id":"u02","scope":"historical","question":"会 Python 会让月薪提高多少？","expect":"reject_causal_claim"}
+]
