@@ -1,0 +1,7 @@
+[
+  {"id":"x01","scope":"historical","question":"杭州的数据岗位月薪中位数是多少？","expect":"supported"},
+  {"id":"x02","scope":"historical","question":"月薪中位数最高的5个岗位类别是什么？只看样本量至少30的类别。","expect":"supported"},
+  {"id":"x03","scope":"historical","question":"各来源的职位描述缺失率是多少？","expect":"supported"},
+  {"id":"x04","scope":"historical","question":"北京产品岗位和运营岗位各有多少条记录？","expect":"supported"},
+  {"id":"x05","scope":"historical","question":"如果把学历提高到硕士，月薪会增加多少？","expect":"reject_causal_claim"}
+]

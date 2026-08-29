@@ -31,6 +31,8 @@ class QueryResult(BaseModel):
     sql: str
     columns: list[str]
     rows: list[dict[str, Any]]
+    display_rows: list[dict[str, Any]] = Field(default_factory=list)
+    value_mappings: list[dict[str, Any]] = Field(default_factory=list)
     truncated: bool = False
 
 

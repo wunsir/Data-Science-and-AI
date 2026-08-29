@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 import json
 import math
 import os
@@ -215,14 +215,17 @@ class OpenAICompatibleLLM:
             {
                 "scope": query.scope,
                 "columns": query.columns,
-                "rows": query.rows[:50],
+                "raw_rows": query.rows[:50],
+                "display_rows": query.display_rows[:50],
+                "value_mappings": query.value_mappings[:200],
                 "truncated": query.truncated,
             }
             for query in queries
         ]
         system = (
             "你是证据约束的招聘数据分析助手。只能根据提供的查询结果回答，"
-            "所有数字必须能在结果行中直接定位。不得声称因果关系、全国代表性或时间趋势。"
+            "所有关键数字必须直接使用 display_rows 中的展示值；raw_rows 只用于核验，禁止自行换算或补算。"
+            "不得声称因果关系、全国代表性或时间趋势。"
             "如果结果为空就明确说没有匹配记录。compare 只并列描述两组结果及口径差异。"
             "不要复述数据覆盖范围或警告中的年份、样本量，也不要自行计算结果行中没有的数字。"
             "用简洁中文回答，不输出 SQL。"
@@ -345,11 +348,14 @@ class SQLiteQueryRunner:
             {key: _json_value(row[key]) for key in columns}
             for row in raw_rows[: self.max_rows]
         ]
+        display_rows, value_mappings = _format_result_rows(rows)
         return QueryResult(
             scope=scope,
             sql=normalized,
             columns=columns,
             rows=rows,
+            display_rows=display_rows,
+            value_mappings=value_mappings,
             truncated=truncated,
         )
 
@@ -456,6 +462,7 @@ def _sqlite_authorizer(
             "ifnull",
             "instr",
             "length",
+            "like",
             "likelihood",
             "likely",
             "ln",
@@ -532,6 +539,10 @@ def unsupported_question_reason(question: str) -> str | None:
     )
     if any(term in normalized for term in causal_terms):
         return "当前数据只能描述样本关联，不能识别因果效应。请改问分组差异或调整后的样本关联。"
+    if "如果" in normalized and any(
+        term in normalized for term in ("提高到", "降低到", "改变", "增加多少", "减少多少")
+    ):
+        return "当前数据只能描述样本关联，不能回答反事实变化。请改问不同分组在样本中的差异。"
     if any(term in normalized for term in unsupported_trend_terms):
         return "当前历史数据没有可靠的逐期观察时间，不能回答多年趋势。请改问2025年末样本分布。"
     return None
@@ -570,13 +581,13 @@ class DataAgent:
         answer: str | None = None
         try:
             plan = self.llm.plan(question, scope, columns)
-            planned_scope, planned_queries = _validate_plan(plan, scope)
+            planned_scope, planned_queries = _validate_plan(plan, scope, question)
             for query_scope, sql in planned_queries:
                 queries.append(self.runner.execute(sql, query_scope))
             if any(query.truncated for query in queries):
                 warning_list.append("查询结果超过200行，接口仅返回前200行。")
             answer = self.llm.answer(question, planned_scope, queries, coverage, warning_list)
-            validate_answer_numbers(answer, queries)
+            validate_answer_numbers(answer, queries, context_text=question)
         except AgentError as exc:
             exc.partial_scope = planned_scope
             exc.partial_queries = queries
@@ -604,7 +615,9 @@ class DataAgent:
         return self.runner.coverage(scope)
 
 
-def _validate_plan(plan: dict[str, Any], expected_scope: Scope) -> tuple[Scope, list[tuple[QueryScope, str]]]:
+def _validate_plan(
+    plan: dict[str, Any], expected_scope: Scope, question: str = ""
+) -> tuple[Scope, list[tuple[QueryScope, str]]]:
     if plan.get("scope") != expected_scope:
         raise InvalidModelOutputError("模型返回的数据范围与请求语义不一致")
     raw_queries = plan.get("queries")
@@ -620,6 +633,7 @@ def _validate_plan(plan: dict[str, Any], expected_scope: Scope) -> tuple[Scope, 
         if query_scope not in ("historical", "live") or not isinstance(sql, str):
             raise InvalidModelOutputError("查询计划缺少合法 scope 或 sql")
         validate_select(sql)
+        _validate_query_semantics(question, sql)
         queries.append((query_scope, sql))
     if expected_scope == "compare":
         if {item[0] for item in queries} != {"historical", "live"}:
@@ -657,20 +671,36 @@ def build_chart(question: str, queries: Sequence[QueryResult]) -> ChartSpec:
     return ChartSpec(type="bar", title=question, x_key=x_key, y_key=y_key, data=data)
 
 
-def validate_answer_numbers(answer: str, queries: Sequence[QueryResult]) -> None:
-    """Reject model-added figures that are absent from the executed rows."""
+def validate_answer_numbers(
+    answer: str,
+    queries: Sequence[QueryResult],
+    context_text: str | None = None,
+) -> None:
+    """Reject figures absent from raw rows or their deterministic presentation mapping."""
 
     evidence: set[Decimal] = set()
+    if context_text:
+        for token in _number_tokens(context_text):
+            _add_decimal_evidence(evidence, token.replace(",", ""))
     for query in queries:
         for row in query.rows:
             for value in row.values():
                 if isinstance(value, (int, float)) and not isinstance(value, bool):
-                    try:
-                        evidence.add(Decimal(str(value)).normalize())
-                    except InvalidOperation:
-                        continue
+                    _add_decimal_evidence(evidence, value)
+                elif isinstance(value, str):
+                    for token in _number_tokens(value):
+                        _add_decimal_evidence(evidence, token.replace(",", ""))
+        mappings = query.value_mappings or _format_result_rows(query.rows)[1]
+        for mapping in mappings:
+            _add_decimal_evidence(evidence, mapping.get("raw_value"))
+            _add_decimal_evidence(evidence, mapping.get("normalized_value"))
+            for token in _number_tokens(str(mapping.get("display_value", ""))):
+                _add_decimal_evidence(evidence, token.replace(",", ""))
     unsupported: list[str] = []
-    for token in re.findall(r"[-+]?\d[\d,]*(?:\.\d+)?", answer):
+    answer_without_list_ordinals = re.sub(
+        r"(?m)^\s*\d+\s*[.)、．]\s*", "", answer
+    )
+    for token in _number_tokens(answer_without_list_ordinals):
         try:
             number = Decimal(token.replace(",", "")).normalize()
         except InvalidOperation:
@@ -680,6 +710,97 @@ def validate_answer_numbers(answer: str, queries: Sequence[QueryResult]) -> None
     if unsupported:
         values = "、".join(dict.fromkeys(unsupported))
         raise InvalidModelOutputError(f"模型回答包含结果表中不存在的数字：{values}")
+
+
+_NUMBER_PATTERN = re.compile(r"(?<![A-Za-z0-9_])[-+]?\d[\d,]*(?:\.\d+)?")
+
+
+def _number_tokens(value: str) -> list[str]:
+    return _NUMBER_PATTERN.findall(value)
+
+
+def _add_decimal_evidence(evidence: set[Decimal], value: Any) -> None:
+    if value is None or isinstance(value, bool):
+        return
+    try:
+        evidence.add(Decimal(str(value)).normalize())
+    except InvalidOperation:
+        return
+
+
+def _format_result_rows(
+    rows: Sequence[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Return a small deterministic presentation layer while preserving raw rows."""
+
+    display_rows: list[dict[str, Any]] = []
+    mappings: list[dict[str, Any]] = []
+    for row_index, row in enumerate(rows):
+        display_row: dict[str, Any] = {}
+        for column, value in row.items():
+            formatted = _format_result_value(column, value)
+            if formatted is None:
+                display_row[column] = value
+                continue
+            kind, normalized, display = formatted
+            display_row[column] = display
+            mappings.append(
+                {
+                    "row_index": row_index,
+                    "column": column,
+                    "kind": kind,
+                    "raw_value": value,
+                    "normalized_value": normalized,
+                    "display_value": display,
+                }
+            )
+        display_rows.append(display_row)
+    return display_rows, mappings
+
+
+def _format_result_value(column: str, value: Any) -> tuple[str, str, str] | None:
+    if not isinstance(value, (int, float)) or isinstance(value, bool):
+        return None
+    numeric = Decimal(str(value))
+    if not numeric.is_finite():
+        return None
+    name = column.lower()
+    if (
+        isinstance(value, int)
+        or name in {"n", "sample_size", "job_count"}
+        or name.endswith(("_count", "_records"))
+    ):
+        normalized = numeric.quantize(Decimal("1"), rounding=ROUND_HALF_UP)
+        return "integer", format(normalized, "f"), format(normalized, "f")
+    if name.endswith(("_rate", "_share", "_percentage", "_pct")):
+        normalized = (numeric * 100).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        display_number = format(normalized, "f").rstrip("0").rstrip(".")
+        return "percentage", format(normalized, "f"), f"{display_number}%"
+    if "salary" in name:
+        normalized = numeric.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        return "currency", format(normalized, "f"), f"{normalized:,.2f}元/月"
+    normalized = numeric.quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
+    display = format(normalized, "f").rstrip("0").rstrip(".")
+    return "decimal", format(normalized, "f"), display
+
+
+def _validate_query_semantics(question: str, sql: str) -> None:
+    """Reject a few known-invalid semantic patterns without rewriting model SQL."""
+
+    normalized_question = question.lower()
+    normalized_sql = re.sub(r"\s+", " ", sql.lower())
+    category_terms = ("岗位类别", "产品岗位", "运营岗位", "数据分析岗位", "商业分析岗位")
+    collection_terms = ("采集关键词", "搜索关键词", "search category")
+    if any(term in normalized_question for term in category_terms) and not any(
+        term in normalized_question for term in collection_terms
+    ):
+        if "search_category" in normalized_sql or "job_category" not in normalized_sql:
+            raise InvalidModelOutputError("岗位类别问题必须使用 normalized job_category")
+    if "技能" in normalized_question:
+        if re.search(r"group\s+by\s+[^;]*\bskills\b", normalized_sql):
+            raise InvalidModelOutputError("技能频次不能按原始 skills JSON 分组")
+        if "instr(skills" not in normalized_sql.replace(" ", ""):
+            raise InvalidModelOutputError("技能频次必须按固定技能词典逐项统计")
 
 
 def _warnings_for_scope(scope: Scope) -> list[str]:

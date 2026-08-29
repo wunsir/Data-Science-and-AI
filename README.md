@@ -73,7 +73,7 @@ py -3.11 -m venv .venv
 $env:LLM_API_KEY = "在本机环境变量中设置，不要写入仓库"
 $env:LLM_BASE_URL = "https://api.siliconflow.cn/v1"
 $env:LLM_MODEL = "deepseek-ai/DeepSeek-V3.2"
-$env:LLM_RESPONSE_FORMAT = "json_schema"
+$env:LLM_RESPONSE_FORMAT = "json_object"
 $env:LLM_ENABLE_THINKING = "false"
 
 .\.venv\Scripts\python.exe -m uvicorn finding_jobs.app:app --host 127.0.0.1 --port 7860
@@ -88,7 +88,7 @@ $env:LLM_ENABLE_THINKING = "false"
 | `LLM_API_KEY` | 无 | OpenAI 兼容模型服务密钥 |
 | `LLM_BASE_URL` | `https://api.siliconflow.cn/v1` | 模型端点 |
 | `LLM_MODEL` | `deepseek-ai/DeepSeek-V3.2` | 当前评测中 historical 表现最好的候选模型 |
-| `LLM_RESPONSE_FORMAT` | `json_schema` | 规划阶段结构化输出格式 |
+| `LLM_RESPONSE_FORMAT` | `json_object` | SiliconFlow 规划阶段结构化输出格式 |
 | `LLM_ENABLE_THINKING` | `false` | 是否启用模型思考模式 |
 | `JOBS_DB_PATH` | `artifacts/jobs_seed.sqlite` | 运行数据库 |
 | `AGENT_QUESTIONS_PER_HOUR` | `10` | 单匿名会话提问额度 |
@@ -114,28 +114,24 @@ SQL 必须是单条 `SELECT`，最多返回 200 行；静态检查、SQLite auth
 
 测试覆盖字段映射、薪资单位、固定词典、ID/指纹去重、provenance、逐层对账、OLS/HC3、SVG、SQL 攻击、范围路由、数字 grounding、模型缺失、空结果、缓存、upsert、白名单和限流。
 
-18 题真实模型评估入口：
+固定题与 holdout 真实模型评估入口：
 
 ```powershell
 .\.venv\Scripts\python.exe scripts\evaluate_agent.py
 ```
 
-题集由 8 个历史、5 个最新、3 个分组比较和 2 个不支持问题组成。脚本需要真实 `LLM_API_KEY`，无密钥时退出且不生成虚假得分；目标为支持问题 SQL 执行成功率至少 90%，不支持问题全部拒绝。
+固定集包含 16 个受支持问题和 2 个不支持问题，另有 5 个未参与修复的 holdout。脚本需要真实 `LLM_API_KEY`，无密钥时退出且不生成虚假得分。
 
-2026-08-28 使用 SiliconFlow 做了真实多模型评测。完整 18 题初轮中，Qwen3.5-35B 为 1/16、DeepSeek-V3.2 为 5/16、Qwen2.5-72B 为 6/16、GLM-4.5-Air 为 0/16；其中 Qwen2.5-72B 的通过题主要来自 experimental 范围。另以 6 个 historical 代表题筛选 DeepSeek-V3.1-Terminus、DeepSeek-V3、Qwen3.5-27B、Qwen3-30B、Qwen2.5-32B 和 Ling-flash-2.0，最高为 2/6；Seed-OSS-36B 因响应时间过长中止。
-
-针对多模型共同暴露的问题，补充受限 `median()` 聚合，并让回答阶段只接收查询结果，不再接收覆盖范围中的数字。DeepSeek-V3.2 完整复测结果为：16 个受支持问题通过 11 个，SQL 执行及重放一致均为 14/16（87.5%），数字 grounding 为 11/16（68.75%），两个不支持问题均被拦截；8 个 historical 问题实际完成 5 个。详细本地报告默认不纳入 Git，位于 `artifacts/agent_evaluation_*.json`。
-
-因此当前数据分析页面与确定性安全边界可继续审计，但自由提问 Agent 仍未达到发布门槛。剩余 historical 失败均是 SQL 成功后对小数格式化或百分比换算触发严格 grounding；本轮不再放宽校验或扩展功能。
+2026-08-29 使用 SiliconFlow `deepseek-ai/DeepSeek-V3.2` 完成最终 18+5 复测：Execution Success 90%，Semantic Correctness 85%，Result Correctness 90%，有效数值题 Numerical Grounding 100%，Unsupported Handling 100%；5 个 holdout 全部通过。确定性 SQL 重放全部一致，核心 historical 查询达到稳定演示门槛。详细本地报告默认不纳入 Git，位于 `artifacts/agent_evaluation.json`。
 
 ## Docker 与公网模式
 
 ```powershell
 docker build -t finding-jobs-agent .
-docker run --rm -p 7860:7860 -e LLM_API_KEY finding-jobs-agent
+docker run --rm -p 7860:7860 -e LLM_API_KEY -e LLM_BASE_URL=https://api.siliconflow.cn/v1 -e LLM_MODEL=deepseek-ai/DeepSeek-V3.2 -e LLM_RESPONSE_FORMAT=json_object finding-jobs-agent
 ```
 
-镜像构建阶段重建历史 seed 与静态分析产物；启动时将 seed 复制到 `/tmp/finding_jobs/jobs.sqlite`，服务监听 `0.0.0.0:7860`。`ms_deploy.json` 固定 ModelScope Docker Studio 端口 7860。当前真实模型评测未达标，未进入 ModelScope 发布；仓库也不会自动创建、更新或发布公开 Studio。
+镜像构建阶段重建历史 seed 与静态分析产物；启动时将 seed 复制到 `/tmp/finding_jobs/jobs.sqlite`，服务监听 `0.0.0.0:7860`。`ms_deploy.json` 固定 ModelScope Docker Studio 端口 7860。ModelScope Studio 必须在平台 Secrets 中配置 `.env.example` 列出的 `LLM_*` 变量，尤其是 `LLM_API_KEY`；真实密钥不得写入仓库或镜像。创建、更新或公开发布 Studio 仍需单独取得授权。
 
 `website/` 可作为 GitHub Pages 静态镜像。若 `/api/health` 不可用，页面自动进入静态模式并禁用 Data Agent，不展示无响应交互。
 
