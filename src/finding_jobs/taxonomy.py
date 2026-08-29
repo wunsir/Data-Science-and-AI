@@ -59,6 +59,11 @@ JOB_CATEGORY_RULES: tuple[tuple[str, tuple[str, ...]], ...] = (
     ),
 )
 
+# Domain terms that contain a category keyword without carrying that meaning.
+JOB_CATEGORY_DISAMBIGUATIONS: dict[str, str] = {
+    "保险杠": "not_insurance",
+}
+
 
 SEARCH_CATEGORY_FALLBACKS: dict[str, str] = {
     "商业分析": "business_analysis",
@@ -129,9 +134,13 @@ def classify_job(title: object, search_category: object = None) -> str:
     """Classify a title, with the collection query as an explicit fallback."""
 
     normalized_title = normalize_text(title)
+    contains_bumper = "保险杠" in normalized_title
+    title_for_matching = normalized_title.replace("保险杠", "")
     for category, patterns in JOB_CATEGORY_RULES:
-        if any(re.search(pattern, normalized_title, flags=re.IGNORECASE) for pattern in patterns):
+        if any(re.search(pattern, title_for_matching, flags=re.IGNORECASE) for pattern in patterns):
             return category
+    if contains_bumper:
+        return "other"
     fallback = SEARCH_CATEGORY_FALLBACKS.get(str(search_category or "").strip())
     return fallback or "other"
 
@@ -156,5 +165,6 @@ def taxonomy_manifest() -> dict[str, object]:
             for category, patterns in JOB_CATEGORY_RULES
         ],
         "search_category_fallbacks": dict(SEARCH_CATEGORY_FALLBACKS),
+        "job_category_disambiguations": dict(JOB_CATEGORY_DISAMBIGUATIONS),
         "skill_rules": {key: list(value) for key, value in SKILL_RULES.items()},
     }

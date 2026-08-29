@@ -71,6 +71,10 @@ class TaxonomyTests(unittest.TestCase):
         self.assertEqual(extract_skills(["熟练使用 Python、SQL 与 Tableau"]), ["python", "sql", "tableau"])
         self.assertEqual(primary_city("上海·浦东·张江"), "上海")
 
+    def test_bumper_title_is_not_misclassified_as_insurance(self) -> None:
+        self.assertEqual(classify_job("保险杠系统工程师", "保险"), "other")
+        self.assertEqual(classify_job("保险杠公司财务经理", "保险"), "finance")
+
 
 class DatabaseBuildTests(unittest.TestCase):
     def _make_fixture(self, root: Path) -> None:

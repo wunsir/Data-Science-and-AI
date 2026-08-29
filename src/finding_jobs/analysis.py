@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 from .taxonomy import SKILL_RULES
+from .visual_data import major_city_salary
 
 
 CATEGORY_LABELS = {
@@ -406,7 +407,7 @@ def analyze_database(
     by_city = _counts(frame, "city", limit=12)
     salary_distribution = _salary_histogram(valid_salary)
     salary_category = _medians(valid_salary, "job_category", mapping=CATEGORY_LABELS)
-    salary_city = _medians(valid_salary, "city", limit=12)
+    salary_city = major_city_salary(valid_salary)
     salary_education = _medians(valid_salary, "education", limit=10)
     salary_experience = _medians(valid_salary, "experience", limit=10)
     skills = _skills_frequency(frame)

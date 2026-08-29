@@ -20,7 +20,7 @@
     "source_id_rule": "source + source_job_id when the platform ID is present",
     "winner_rule": "most complete row; earliest deterministic source row breaks ties"
   },
-  "generated_at": "2026-08-28T04:44:57+00:00",
+  "generated_at": "2026-08-29T14:58:01+00:00",
   "input_files": [
     {
       "path": "boss/joblist_1.xlsx",
@@ -566,6 +566,9 @@
   "scope_label": "2025年末采集样本",
   "source_fingerprint": "c8ca0e0c923f24c27f48714387e289d49a3950bad76d27007a7c2b94da0f8b28",
   "taxonomy": {
+    "job_category_disambiguations": {
+      "保险杠": "not_insurance"
+    },
     "job_category_rules": [
       {
         "category": "business_analysis",

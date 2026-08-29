@@ -9,6 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 from finding_jobs.analysis import analyze_database, fit_salary_model
+from finding_jobs.visual_data import major_city_salary
 
 
 class AnalysisTests(unittest.TestCase):
@@ -109,6 +110,23 @@ class AnalysisTests(unittest.TestCase):
         terms = [item["term"] for item in result["coefficients"]]
         self.assertFalse(any(term.startswith("salary_") for term in terms))
         self.assertIn("predefined_skills", result["controls"])
+
+    def test_major_city_salary_selects_cities_by_sample_size(self) -> None:
+        rows = []
+        for index, city in enumerate(["上海", "深圳", "北京", "广州", "南京", "杭州"]):
+            rows.extend(
+                {"city": city, "salary_mid_monthly": 10_000 + index * 1_000}
+                for _ in range(36 - index)
+            )
+        rows.extend(
+            {"city": "芜湖", "salary_mid_monthly": 50_000}
+            for _ in range(30)
+        )
+
+        result = major_city_salary(pd.DataFrame(rows), limit=6)
+
+        self.assertEqual({item["label"] for item in result}, {"上海", "深圳", "北京", "广州", "南京", "杭州"})
+        self.assertNotIn("芜湖", {item["label"] for item in result})
 
     def test_analysis_writes_complete_visual_story(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:

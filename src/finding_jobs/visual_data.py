@@ -84,6 +84,21 @@ def median_groups(
     ]
 
 
+def major_city_salary(frame: pd.DataFrame, limit: int = 6) -> list[dict[str, Any]]:
+    """Compare salary among the cities with the largest analyzable samples."""
+
+    city = frame["city"].dropna().astype(str)
+    city = city[city.str.strip().ne("")]
+    counts = (
+        city.value_counts()
+        .rename_axis("city")
+        .reset_index(name="count")
+        .sort_values(["count", "city"], ascending=[False, True])
+    )
+    selected = counts.head(limit)["city"].tolist()
+    return median_groups(frame[frame["city"].astype(str).isin(selected)], "city")
+
+
 def quantile_groups(frame: pd.DataFrame, column: str, limit: int = 10) -> list[dict[str, Any]]:
     rows = []
     for value, group in frame.groupby(frame[column].fillna("未知")):
@@ -438,7 +453,7 @@ def prepare_story_data(
         "counts": {"jobs": len(frame), "salary": len(valid_salary)},
         "top_skills": top_skills, "categories": categories, "top_cities": top_cities,
         "city_rows": city_rows, "category_columns": category_columns, "city_cells": city_cells,
-        "city_salary": median_groups(valid_salary, "city", limit=12),
+        "city_salary": major_city_salary(valid_salary),
         "category_salary": median_groups(valid_salary, "job_category", mapping=CATEGORY_LABELS),
         "city_education_rows": city_education_rows, "city_education_series": city_education_series,
         "lorenz": lorenz(valid_salary),
