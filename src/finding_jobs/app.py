@@ -40,7 +40,9 @@ def create_app(
     resolved_db_path = Path(
         db_path or os.getenv("JOBS_DB_PATH") or project_root / "artifacts" / "jobs_seed.sqlite"
     )
-    resolved_website = Path(website_dir) if website_dir is not None else project_root / "website"
+    resolved_website = Path(
+        website_dir or os.getenv("WEBSITE_DIR") or project_root / "website"
+    )
 
     application = FastAPI(
         title="招聘数据分析平台",

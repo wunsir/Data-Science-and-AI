@@ -4,7 +4,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     JOBS_SEED_DB_PATH=/app/artifacts/jobs_seed.sqlite \
-    JOBS_DB_PATH=/tmp/finding_jobs/jobs.sqlite
+    JOBS_DB_PATH=/tmp/finding_jobs/jobs.sqlite \
+    WEBSITE_DIR=/app/website
 
 WORKDIR /app
 

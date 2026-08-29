@@ -82,6 +82,24 @@ def test_health_meta_and_agent_api(tmp_path):
     assert payload["queries"][0]["rows"][0]["job_count"] == 2
 
 
+def test_website_dir_can_be_resolved_from_environment(tmp_path, monkeypatch):
+    website_dir = tmp_path / "public-website"
+    website_dir.mkdir()
+    (website_dir / "index.html").write_text(
+        "<!doctype html><title>deployed website</title>", encoding="utf-8"
+    )
+    monkeypatch.setenv("WEBSITE_DIR", str(website_dir))
+
+    app = create_app(
+        db_path=make_database(tmp_path / "jobs.sqlite"),
+        llm=FakeLLM(),
+    )
+    response = TestClient(app).get("/")
+
+    assert response.status_code == 200
+    assert "deployed website" in response.text
+
+
 def test_public_agent_forces_historical_and_rejects_experimental_scopes(tmp_path):
     client = make_client(make_database(tmp_path / "jobs.sqlite"))
 
